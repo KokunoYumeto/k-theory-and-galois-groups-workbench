@@ -1,0 +1,12 @@
+tag	date	who	effort	type	outcome	record
+WB-0007.001	2026-11-18	Claude Fable 5.2	max	targeted proof check	every step of the runs' proof confirmed	https://github.com/KokunoYumeto/k-theory-and-galois-groups-workbench/blob/main/work/WB-0007/v1/CHECKS.md
+WB-0007.001	2026-11-23	Claude Opus 5.5	max	targeted proof check	second reader: Section 4 every step; no error	https://github.com/KokunoYumeto/k-theory-and-galois-groups-workbench/blob/main/work/WB-0007/v1/CHECKS.md
+WB-0007.001	2026-11-23	Claude Opus 5.5	max	targeted proof check	main session: abelianizations and character argument recomputed	https://github.com/KokunoYumeto/k-theory-and-galois-groups-workbench/blob/main/work/WB-0007/v1/CHECKS.md
+WB-0007.002	2026-11-18	Claude Fable 5.2	max	targeted proof check	every step of the runs' proof confirmed	https://github.com/KokunoYumeto/k-theory-and-galois-groups-workbench/blob/main/work/WB-0007/v1/CHECKS.md
+WB-0007.002	2026-11-23	Claude Opus 5.5	max	targeted proof check	second reader: decomposition checked against Nakamura-Schneps section 1 and Definition 5.1	https://github.com/KokunoYumeto/k-theory-and-galois-groups-workbench/blob/main/work/WB-0007/v1/CHECKS.md
+WB-0007.002	2026-11-23	Claude Opus 5.5	max	targeted proof check	main session: the Kummer image 2Z-hat and the normalization checked	https://github.com/KokunoYumeto/k-theory-and-galois-groups-workbench/blob/main/work/WB-0007/v1/CHECKS.md
+WB-0007.003	2026-11-21	Claude Fable 5.2	max	independent re-proof	the final computation re-proved	https://github.com/KokunoYumeto/k-theory-and-galois-groups-workbench/blob/main/work/WB-0007/v1/CHECKS.md
+WB-0007.003	2026-11-22	Claude Opus 5.5	max	computation or formal certificate	parity computation exhaustive over Z/12, own program	https://github.com/KokunoYumeto/k-theory-and-galois-groups-workbench/blob/main/work/WB-0007/v1/CHECKS.md
+WB-0007.003	2026-11-23	Claude Fable 5.2	max	targeted proof check	the chain behind the hexagonal self-similarity checked	https://github.com/KokunoYumeto/k-theory-and-galois-groups-workbench/blob/main/work/WB-0007/v1/CHECKS.md
+WB-0007.003	2026-11-23	Claude Opus 5.5	max	targeted proof check	second reader: Section 8 and the rewritten proofs; no error	https://github.com/KokunoYumeto/k-theory-and-galois-groups-workbench/blob/main/work/WB-0007/v1/CHECKS.md
+WB-0007.004	2026-11-23	Claude Opus 5.5	max	targeted proof check	second reader: correct as stated, with its hypothesis	https://github.com/KokunoYumeto/k-theory-and-galois-groups-workbench/blob/main/work/WB-0007/v1/CHECKS.md
