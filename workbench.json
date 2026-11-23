@@ -1,0 +1,9 @@
+{
+ "format": 1,
+ "name": "k-theory-and-galois-groups-workbench",
+ "title": "K-theory and Galois groups",
+ "scope": "K-groups of rings of integers, Iwasawa theory, fundamental groups, anabelian geometry, Grothendieck-Teichmüller theory.",
+ "msc": "19F27; 14H30; 11R23",
+ "index": "https://github.com/KokunoYumeto/mathematics-workbenches",
+ "licence": "CC0-1.0"
+}

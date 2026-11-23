@@ -1,0 +1,1222 @@
+% Hexagon note H06b, 23 Nov 2026. CC0 1.0.
+% Mathematics and Sections 3-8: GPT-6 Astra (ChatGPT Pro mode), November 2026.
+% Sections 1-2, selection and closing: Claude Fable 5.2 at effort max, as editor.
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,mathtools,microtype}
+\usepackage[a4paper,margin=28mm]{geometry}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage[hidelinks]{hyperref}
+\setlength{\emergencystretch}{2.5em}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newcommand{\workbenchurl}{https://github.com/KokunoYumeto/mathematics-workbenches/blob/main/works/WB-0006.md}
+\numberwithin{equation}{section}
+\title{The question of Anderson and Ihara on the pro-$p$ Galois action on the projective line minus three
+points, at every prime satisfying Vandiver's conjecture}
+\author{Entered at deposit}
+\date{23 November 2026 \quad CC0 1.0}
+\begin{document}
+\maketitle
+\begin{abstract}
+\noindent
+Ihara showed that the kernel of the outer action of the absolute Galois group of $\mathbb Q$ on the pro-$p$
+fundamental group of the projective line minus three points cuts out a field contained in the maximal pro-$p$
+extension of $\mathbb Q(\mu_p)$ unramified outside $p$, and Anderson and Ihara asked whether the two fields are
+equal. Sharifi proved that they are equal at odd regular primes if the Deligne--Ihara conjecture holds, and Brown
+proved that conjecture. We prove the equality at every odd prime $p$ for which the plus part of the Iwasawa module
+of $p$-class groups of the cyclotomic tower is finite. This holds whenever $p$ does not divide the class number of
+the real cyclotomic field $\mathbb Q(\mu_p)^+$, which is Vandiver's conjecture at $p$; by the computation of Hart,
+Harvey and Ong the equality therefore holds at every odd prime below $2^{31}$. At an irregular prime the Galois
+group in question has generators that the regular case does not have. The theorems of Fukaya--Kato and
+Wake--Wang-Erickson on Sharifi's symbol map show that cup products of cyclotomic units generate the relevant
+second cohomology at every finite level, and we prove that this forces the images of the new generators to have
+poles that separate all words. The mathematics and the proofs were produced by GPT-6 Astra (ChatGPT Pro mode).
+Claude Opus 5.5 at effort high checked the deduction from Vandiver's conjecture and the present text of Sections 4
+to 6 step by step, with the theorems of Fukaya--Kato and Wake--Wang-Erickson read at the places cited; Claude Fable
+5.2 at effort max edited the text, wrote its first two sections and refereed Sections 3 to 6. No human has
+checked it.
+\end{abstract}
+
+\section{The question and the theorem}
+
+Let $p$ be an odd prime,
+\begin{equation}
+ \mathcal X=\mathbb P^1_{\mathbb Q}\setminus\{0,1,\infty\},\qquad
+ \Pi_p=\pi_1^{\mathrm{\acute et}}(\mathcal X_{\overline{\mathbb Q}})^{(p)},
+ \qquad
+ \rho_p:G_{\mathbb Q}\longrightarrow\operatorname{Out}(\Pi_p),
+\end{equation}
+where $\Pi_p$ is the maximal pro-$p$ quotient of the geometric fundamental group, a free pro-$p$ group of rank
+two, and $\rho_p$ is the outer action of the absolute Galois group. Write $\Omega_p^*$ for the fixed field of
+$\ker\rho_p$, and $\Omega_p$ for the maximal pro-$p$ extension of $F_1=\mathbb Q(\mu_p)$ unramified outside $p$,
+both inside one algebraic closure. Ihara proved $\Omega_p^*\subseteq\Omega_p$ \cite{Ihara1986}; see
+\cite[p.~1]{Sharifi2002}. Anderson and Ihara asked whether
+\[
+ \Omega_p^*=\Omega_p
+\]
+\cite[p.~272, question (a)]{AndersonIhara1988}. Put
+\begin{equation}
+ F_r=\mathbb Q(\mu_{p^r}),\qquad F_\infty=\bigcup_{r\ge1}F_r,
+ \qquad X_p=\varprojlim_r\operatorname{Cl}(F_r)\{p\},
+\end{equation}
+the limit of the $p$-primary parts of the class groups for the norm maps, and let $X_p^+$ be the part of $X_p$
+fixed by complex conjugation. Greenberg's conjecture for this tower is the finiteness of $X_p^+$. Vandiver's
+conjecture at $p$ is $p\nmid h(F_1^+)$, where $F_1^+$ is the real subfield of $F_1$.
+
+\begin{theorem}\label{thm:greenberg-kernel}
+Let $p$ be an odd prime.
+\begin{itemize}
+\item[\textup{(a)}] If $X_p^+$ is finite, then $\Omega_p^*=\Omega_p$.
+\item[\textup{(b)}] If $p$ does not divide the class number of $\mathbb Q(\mu_p)^+$, then $X_p^+=0$, and so
+$\Omega_p^*=\Omega_p$.
+\item[\textup{(c)}] $\Omega_p^*=\Omega_p$ for every odd prime $p<2^{31}$.
+\end{itemize}
+\end{theorem}
+
+\paragraph{What it means.}
+The pro-$p$ covers of the line minus three points, with the Galois action on them, see every extension of
+$\mathbb Q(\mu_p)$ that the ramification condition allows: an element of $G_{\mathbb Q}$ that acts trivially on
+the tower of these covers, up to inner automorphisms, fixes $\Omega_p$. Equivalently, the group
+$\operatorname{Gal}(\Omega_p/\mathbb Q)$ acts faithfully on $\Pi_p$ by outer automorphisms. Anderson and Ihara
+described $\Omega_p^*$ as the field generated by their higher circular $p$-units \cite[Theorem~2\,(IV)]{AndersonIhara1988},
+as recalled in \cite[p.~2]{IshiiKernel2026}; for the
+primes of the theorem these units therefore generate all of $\Omega_p$. Part (c) uses the verification of
+Vandiver's conjecture for every odd prime below $2^{31}$ by Hart, Harvey and Ong
+\cite[Section 1, item (2)]{HartHarveyOng2017}; that computation is an input.
+
+\paragraph{Why it matters.}
+The action of $G_{\mathbb Q}$ on the fundamental group of $\mathcal X$ is the first case of the programme, going
+back to Grothendieck and to Ihara's paper \cite{Ihara1986}, of describing Galois groups through their action on
+fundamental groups of moduli spaces. Its pro-$p$ part is the best understood: its image is filtered, the graded
+pieces carry the Soul\'e characters, and after tensoring with $\mathbb Q_p$ the graded Lie algebra is free on one
+generator in each odd degree at least three, by Brown's theorem. What the kernel is had been known only at regular
+primes. The theorem gives it at every prime for which Vandiver's conjecture is known, which at present includes
+every irregular prime below $2^{31}$, and it reduces the question at the remaining primes to Greenberg's
+conjecture for the cyclotomic tower.
+
+\paragraph{Credit.}
+The inclusion $\Omega_p^*\subseteq\Omega_p$ is Ihara's and the question is Anderson and Ihara's. Sharifi proved
+that at an odd regular prime the Deligne--Ihara conjecture implies the equality \cite[Theorem 1.1, p.~2]{Sharifi2002},
+and Brown proved that conjecture \cite[Theorem 1.1]{Brown2012}; so the regular case is their theorem. The proof
+here follows the same plan: embed the arithmetic group in a free prounipotent group and separate its elements by
+coefficients. It uses, as theorems of their authors, the weighted completion of Hain and Matsumoto
+\cite{HainMatsumoto2001} and Brown's theorem for the target; the theorems of Ferrero--Washington
+\cite{FerreroWashington1979} and Iwasawa \cite{Iwasawa1981} for the freeness of the arithmetic group; and, for the
+step that is new at irregular primes, the symbol construction of Fukaya and Kato \cite{FukayaKato2012} with the
+integral isomorphism theorem of Wake and Wang-Erickson \cite{WakeWangEricksonPseudo2018}, both proved in the
+study of Sharifi's conjectures. That Vandiver's conjecture implies Sharifi's conjecture is due to Wake and
+Wang-Erickson \cite[abstract and Corollary~5.1.2]{WakeWangErickson2017}. What is supplied here are two lemmas, the comparison of finite-level cup products
+with the class-two extension of the arithmetic group (Lemma~\ref{lem:cup-pole-bridge}) and the separation of
+Magnus coefficients by poles (Lemma~\ref{lem:rational-magnus}), and the verification of their hypotheses.
+
+\paragraph{Context.}
+Sharifi's argument at regular primes uses that $\operatorname{Gal}(\Omega_p/F_1)$ is then free pro-$p$ on
+generators in odd characters only. The same paper studies, at irregular primes, whether Soul\'e elements generate
+the graded Lie algebra over $\mathbb Z_p$, which is a different question \cite[Sections 1 and 4]{Sharifi2002};
+the present theorem makes no integral statement of that kind. Ishii recalls the regular case and proves the
+analogue of Sharifi's theorem for once-punctured elliptic curves with complex multiplication, under an analogue of
+the Deligne--Ihara conjecture \cite[Theorem 1.1 and Remark 1.1.1, p.~2]{IshiiKernel2026}. In 2019 Sharifi
+described the irregular case as ``a very interesting open question of Anderson and Ihara''
+\cite[\S1, p.~222]{Sharifi2019}. We have found no earlier statement of the equality at an irregular prime; searches of the literature and of Hexagon on 23 November 2026
+returned none.
+
+\paragraph{Scope.}
+The theorem does not prove Vandiver's or Greenberg's conjecture and says nothing at an odd prime where $X_p^+$ is
+not known to be finite. The prime $2$, where the real place needs a convention, is not treated in this note.
+
+\section{Proof overview}
+
+Let $H=\operatorname{Gal}(\Omega_p/F_\infty)$. An element of $\ker\rho_p$ acts trivially on $\mu_{p^\infty}$, so
+its image in $\operatorname{Gal}(\Omega_p/\mathbb Q)$ lies in $H$, and the theorem says that the outer action of
+$H$ on $\Pi_p$ is faithful. The action on $\Pi_p$ induces one on its rational unipotent completion, and by Hain
+and Matsumoto the image of $H$ there is Zariski dense in a prounipotent group $\mathcal U_p$ whose Lie algebra is,
+by Brown's theorem, free on letters $s_m$ of odd weight $m\ge3$ (Section~\ref{sec:rational-image}). So it suffices
+to prove that $\rho:H\to\mathcal U_p(\mathbb Q_p)$ is injective.
+
+\emph{The regular case.} $H$ is a free pro-$p$ group (Iwasawa, with $\mu=0$), with an action of
+$\Gamma=\operatorname{Gal}(F_\infty/F_1)$ and of $\Delta=\operatorname{Gal}(F_1/\mathbb Q)$. If $p$ is regular,
+$H^{\mathrm{ab}}$ is free of rank one over the Iwasawa algebra in each odd character of $\Delta$ and zero in the
+even ones. The coefficient of a word in the letters $s_m$ is then an iterated integral of bounded measures on
+$\Gamma$, evaluated at the weights $u^m$; a nontrivial element has a nonzero coefficient because a nonzero bounded
+measure has a nonzero moment at infinitely many weights.
+
+\emph{The difficulty.} At an irregular prime $H^{\mathrm{ab}}=U\oplus T$ has an even part $T$, of finite rank over
+$\mathbb Z_p$, dual to the minus part of $X_p$. The target has no letters of even weight. A generator $y$ of $H$
+lying over $T$ is sent to words of length at least two, and nothing in the rational picture prevents the images
+of such generators from satisfying relations.
+
+\emph{The idea.} Let $q_e$ be the characteristic polynomial of a generator $\gamma$ of $\Gamma$ on a character
+component $T_e$. The element $q_e(\gamma)y$ is trivial in $H^{\mathrm{ab}}$, hence a product of commutators, and its
+class modulo triple commutators is an alternating tensor $C_e$ in two odd variables. The length-two coefficient
+of $y$ at weights $(m,n)$ is then $C_e(u^m-1,u^n-1)/q_e(u^{m+n})$: it is a quotient of power series with a pole
+along $(1+T_1)(1+T_2)=\alpha$ for each root $\alpha$ of $q_e$. If the numerator does not vanish identically on
+each of these pole divisors, then in the coefficient of a first nonzero degree one can isolate, by expanding along
+the poles of highest order, a single product of nonzero factors; this proves injectivity
+(Lemma~\ref{lem:rational-magnus}). Repeated roots are allowed.
+
+\emph{Why the numerators do not vanish.} If $C_e$ vanished on the pole divisor of $\alpha$, the class-two quotient
+of $H$ would split equivariantly over an eigenline $W\subset T$ for $\alpha$. A cochain computation then shows
+that, at every finite level $n$, the cup product of two even classes in $H^1$ of
+$\operatorname{Gal}(\Omega_p/F_{n+1})$ with coefficients $\mathbb Z/p^n(1)$ has zero component along $W$ in
+$H^2$ with coefficients $\mathbb Z/p^n(2)$ (Lemma~\ref{lem:cup-pole-bridge}). This is impossible if such cups
+generate the even part of that $H^2$ at every level. That generation is the arithmetic input: under the
+finiteness of $X_p^+$, Wake and Wang-Erickson prove that Sharifi's symbol map is surjective, and Fukaya and Kato
+deduce that the symbols $\{1-\zeta^a,1-\zeta^b\}$ of cyclotomic units generate at each finite level
+(Section~6).
+
+\emph{Where the hypothesis is used.} The finiteness of $X_p^+$ is used three times in Section~6: for the
+freeness of rank one of $U$ after inverting $p$, for the cyclicity of each $T_e$ after inverting $p$, and for the
+surjectivity of the symbol map. Section~7 proves part (b): if $p\nmid h(F_1^+)$ then the $p$-class groups of all
+layers of the real tower vanish, because each layer is cyclic of degree $p$ over the previous one and totally
+ramified at one prime (Lemma~\ref{lem:persistence}).
+
+\section{The rational outer image}
+\label{sec:rational-image}
+
+We first identify the representation into which the arithmetic group
+will be embedded. Rational unipotent completion of $\Pi_p$ is
+functorial for automorphisms and inner automorphisms. It therefore
+induces a homomorphism from its pro-$p$ outer automorphism group to
+the outer automorphism group of the rational completion
+\cite[Appendix A.6, A.9--A.10]{HainMatsumoto2001}.
+In particular, an element acting trivially on $\Pi_p$ acts trivially
+on this rational completion.
+
+Let $B_p$ denote the proalgebraic closure of the induced arithmetic
+outer image, and let $\mathcal U_p$ denote its prounipotent radical.
+The cited Hain--Matsumoto results give
+\begin{equation}
+ 1\longrightarrow\mathcal U_p\longrightarrow B_p
+   \longrightarrow\mathbb G_m\longrightarrow1,
+ \qquad H\longrightarrow\mathcal U_p(\mathbb Q_p)
+\end{equation}
+with dense image in each finite weight quotient. The reductive
+quotient is the cyclotomic character. Brown's theorem \cite{Brown2012} identifies
+the graded Lie algebra of $\mathcal U_p$ with the free Lie algebra
+on one letter $s_m$ in each odd arithmetic weight $m\ge3$.
+
+The dense subgroup in Hain--Matsumoto's Theorem~8.4 is the
+cyclotomic kernel $I_p^1G_{\mathbb Q,\{p\}}$. To identify its image
+here, put $\mathcal G_p=\operatorname{Gal}(\Omega_p/\mathbb Q)$.
+The quotient $G_{\mathbb Q,\{p\}}\to\mathcal G_p$ maps that kernel
+onto $H$: any lift of an element of $H$ already fixes every
+$p$-power root of unity, since the cyclotomic field lies in
+$\Omega_p$. Conversely a cyclotomically trivial element maps into
+$H=\operatorname{Gal}(\Omega_p/F_\infty)$.
+The rational outer action factors through this quotient, so its
+images of these two kernels coincide. This proves the asserted
+density for the specific arithmetic group used below.
+
+Here is the completion and normalization used below. A Levi splitting
+provides the weight decomposition. Choose homogeneous lifts of the
+free graded generators. The homomorphism from the completed free Lie
+algebra on these lifts induces an isomorphism on every graded piece.
+Induction on the finite weight filtration makes it an isomorphism
+on each finite quotient; the separated inverse limit is an isomorphism
+of completed Lie algebras. Its completed enveloping algebra is thus
+the free associative algebra completed by arithmetic weight.
+There are only finitely many letters and words below each fixed weight.
+
+For odd $p$, choose a lift $\gamma$ of a generator of
+$\operatorname{Gal}(F_\infty/F_1)$ and write
+$u=\chi_p(\gamma)\in1+p\mathbb Z_p$. In each positive weight the
+linear operator $u^m-1$ is invertible over $\mathbb Q_p$. Successive
+conjugation in those weight spaces puts the image of $\gamma$ in
+a Levi torus. If the prime-to-$p$ group $\Delta$ commutes with
+$\gamma$, its unipotent part is then trivial: a first nonzero weight
+of an element centralizing $\gamma$ would be fixed by $u^m$, which
+is impossible. Consequently conjugation on the letters is
+\begin{equation}
+ \gamma s_m=u^m s_m,\qquad
+ \delta s_m=\omega(\delta)^m s_m.
+\end{equation}
+This normalization is performed at finite
+weights before taking the inverse limit.
+
+\section{Cup products and the class-two extension}
+
+This section proves the precise link from finite arithmetic cup products
+to the denominators that occur in the rational action. All cohomology
+of profinite groups is continuous cohomology. Completed tensor and
+exterior products are taken in the category of compact
+$\mathbb Z_p$-modules.
+\begin{lemma}[Finite-level cup comparison]\label{lem:cup-pole-bridge}
+Let $p$ be odd, let $P=H\rtimes\Gamma$, where $H$ is free pro-$p$
+and $\Gamma=\langle\gamma\rangle\simeq\mathbb Z_p$, and let an
+involution $c$ preserve $H$ and fix $\gamma$. Put
+\begin{equation}
+ \Lambda=\mathbb Z_p[[\Gamma]],\qquad R=\Lambda[1/p],\qquad
+ H^{\rm ab}=U\oplus T,
+\end{equation}
+where $c=-1$ on $U$ and $c=1$ on $T$. Suppose that $U$ is finitely
+generated over $\Lambda$, that $U[1/p]$ is free of finite rank over
+$R$, and that $T$ is finite free over $\mathbb Z_p$. Suppose also
+that each even character component $T_e[1/p]$ under the commuting
+prime-to-$p$ action is cyclic over $R$. Write $q_e(z)$ for its monic
+characteristic and minimal polynomial for $\gamma$.
+
+Let the coefficient character satisfy $\chi(\gamma)=u\in1+p\mathbb Z_p$
+and $\chi(c)=-1$, with $H$ acting trivially on its twists. Assume that,
+for every $n\geq1$, the even part of
+\begin{equation}
+ H^2(P_n,\mathbb Z/p^n(2)),\qquad
+ P_n=H\rtimes\Gamma^{p^n},
+\end{equation}
+is generated by cups of $c$-even classes in
+$H^1(P_n,\mathbb Z/p^n(1))$. A cofinal diagonal of the two level
+indices suffices.
+
+Then the odd--odd companion numerators of the group extension satisfy the
+pole-nonvanishing condition: for every root $\alpha$ of every
+nonzero $q_e$, at least one coefficient has nonzero restriction to
+\begin{equation}
+ D_\alpha=(1+T_1)(1+T_2)-\alpha=0.
+                                                               \label{eq:ce1}
+\end{equation}
+Here coefficients are taken in the bounded-denominator power-series
+coordinates of an $R$-basis of $U[1/p]$. Repeated roots are allowed.
+For the subsequent pole-separation application the arithmetic module
+input supplies rank one in every odd character.
+\end{lemma}
+
+\begin{proof}
+Since $2$ is a unit, the class-two quotient of $H$ has its integral
+Baker--Campbell--Hausdorff Lie structure. Quotient its central
+commutator module by all brackets having a $T$ input. The remaining
+central module is
+\begin{equation}
+ N=\widehat{\bigwedge}^{\,2}_{\mathbb Z_p}U.
+\end{equation}
+Complex conjugation is $1$ on $N$. Thus the minus part of the
+resulting Lie module maps isomorphically to $U$, providing a
+canonical $\Gamma$-equivariant odd section. Its plus part is the
+continuous module extension
+\begin{equation}
+ 0\longrightarrow N\longrightarrow E\longrightarrow T
+ \longrightarrow0.                                          \label{eq:ce2}
+\end{equation}
+Choose a rational cyclic generator $v$ of $T_e[1/p]$ and a lift
+$y\in E[1/p]$ in the same character component, using the
+prime-to-$p$ character projector. The element
+\begin{equation}
+ q_e(\gamma)y=C_e\in N[1/p]                                 \label{eq:ce3}
+\end{equation}
+is precisely the odd--odd quadratic companion error. In the quotient
+just taken, brackets involving even lifts vanish, so an ordered
+companion product becomes its additive characteristic-polynomial
+expression. A derived element has the same degree-two logarithmic
+and Magnus coefficient.
+
+Finite generation clears the denominators of the chosen isomorphism
+$U[1/p]\simeq R^r$ and its inverse: for some $a$,
+$p^a\Lambda^r\subset U\subset p^{-a}\Lambda^r$ in these
+coordinates. Completed tensor and exterior squares inherit fixed
+denominator bounds. Consequently $N[1/p]$ is the bounded-denominator
+alternating two-variable coefficient module, rather than a module of
+series with arbitrary coefficient denominators.
+
+Pass to a finite splitting field $L/\mathbb Q_p$, with integers
+$\mathcal O$, and suppose that every coefficient of $C_e$ vanishes
+on $D_\alpha=0$. All roots satisfy $\alpha-1\in\mathfrak m_{\mathcal O}$,
+because the action of the pro-$p$ group $\Gamma$ on the finite-rank
+lattice $T$ is continuous. The change of variable
+\begin{equation}
+ S=(1+T_1)(1+T_2)-\alpha,\qquad
+ T_2=\frac{\alpha+S}{1+T_1}-1
+\end{equation}
+is an integral formal-coordinate change. Its specialization kernel
+is $(S)$, and division preserves a common denominator bound.
+Since $D_\alpha$ is symmetric, an alternating numerator has an
+alternating quotient. Thus, in $N_L$,
+\begin{equation}
+ C_e=(\gamma-\alpha)A.                                      \label{eq:ce4}
+\end{equation}
+Wrong-character coefficients are identically zero, so it suffices
+to assume vanishing for the matching odd-character pairs.
+
+Set $r_e(z)=q_e(z)/(z-\alpha)$. Cyclicity implies that
+$w=r_e(\gamma)v$ is nonzero and spans an $\alpha$-eigenline
+$W\subset T_L$. For a repeated root it is the socle of the cyclic
+generalized eigenspace. Equations \eqref{eq:ce3}--\eqref{eq:ce4} show that
+\begin{equation}
+ \widetilde w=r_e(\gamma)y-A
+\end{equation}
+is a $\Gamma$-equivariant lift of $w$. Hence \eqref{eq:ce2} splits over
+$W$ after inverting $p$.
+
+We now compare this split with the cup map of this group. The lattice
+$T_{\mathcal O}\cap W$ is saturated, hence an $\mathcal O$-direct
+summand of $T_{\mathcal O}$. Choose an $\mathcal O$-linear section
+$s:T_{\mathcal O}\to E_{\mathcal O}[1/p]$ extending the equivariant
+section on that lattice. A fixed power $p^b$ makes this section
+integral. Write the class-two logarithm of $h\in H$ as
+\begin{equation}
+ x(h)+s(t(h))+z(h),\qquad
+ x(h)\in U_{\mathcal O},\quad t(h)\in T_{\mathcal O},\quad
+ z(h)\in N_{\mathcal O}[1/p].
+\end{equation}
+The same $p^b$ clears every $z(h)$. The section defect is
+\begin{equation}
+ \beta_\delta(t)=\delta s(t)-s(\delta t),\qquad\delta\in\Gamma,
+                                                               \label{eq:ce5}
+\end{equation}
+and it vanishes on $W$.
+
+Fix $n$ and two even cohomology classes $f,g$. Average their cocycles
+by $(1+c)/2$. The resulting invariant cocycles vanish on the chosen
+$\Gamma_n=\Gamma^{p^n}$ section: $c$ fixes its elements and is
+$-1$ on the coefficient module. On $H$ they are additive maps
+from $U$ to $\mathcal O/p^n(1)$, vanish on $T$, and are
+$\Gamma_n$-equivariant. Put
+\begin{equation}
+ \psi=f\wedge g:N_{\mathcal O}\longrightarrow\mathcal O/p^n(2),
+ \quad
+ \psi([x_1,x_2])=f(x_1)g(x_2)-f(x_2)g(x_1).
+\end{equation}
+The continuous cochain
+\begin{equation}
+ k(h)=-\frac{p^b}{2}f(h)g(h)-\psi(p^b z(h))                    \label{eq:ce6}
+\end{equation}
+is integral. The class-two product has central coordinate
+$z_1+z_2+[x_1,x_2]/2$. Its substitution in \eqref{eq:ce6} gives
+\begin{equation}
+ dk(h_1,h_2)=p^b f(h_1)g(h_2).
+\end{equation}
+Indeed the two summands contribute respectively
+$p^b(f_1g_2+f_2g_1)/2$ and $p^b(f_1g_2-f_2g_1)/2$.
+
+Extend $k$ to $P_n$ by $k(h\delta)=k(h)$. For $h,h'\in H$
+and $\delta,\delta'\in\Gamma_n$, the residual cocycle is explicitly
+\begin{equation}
+ \begin{aligned}
+ &(p^b f\smile g-dk)(h\delta,h'\delta')\\
+ &\qquad=k(\delta h'\delta^{-1})-\chi(\delta)^2k(h')\\
+ &\qquad=-\psi\bigl(p^b\beta_\delta(t(h'))\bigr).
+ \end{aligned}
+\end{equation}
+Indeed $f$ and $g$ vanish on the section, their restrictions to $H$
+are $\Gamma_n$-equivariant, and the quadratic summand of $k$
+transforms by $\chi^2$. Thus its Hochschild--Serre edge is, up to
+the convention for the edge sign and input conjugation,
+\begin{equation}
+ \pm\psi(p^b\beta_\delta(t)).                               \label{eq:ce7}
+\end{equation}
+This vanishes on $W$. A convention that conjugates $t$ makes no
+difference because $W$ is $\Gamma$-stable. Thus the same fixed
+$p^b$ multiple of every cup has zero restriction to the dual of
+$W$, at every finite level.
+
+For completeness, the target and its transitions are explicit.
+Both $H$ and $\Gamma_n$ have $p$-cohomological dimension one,
+and the minus part $U$ contributes only odd parity. Therefore
+\begin{equation}
+ H^2(P_n,\mathcal O/p^n(2))^+
+ \simeq H^1(\Gamma_n,\operatorname{Hom}(T,\mathcal O/p^n)(2)).
+                                                               \label{eq:ce8}
+\end{equation}
+Let $V=\operatorname{Hom}_{\mathbb Z_p}(T,\mathcal O)(2)$, with
+$\gamma$ operator $B$. Normalized cocycle evaluation identifies
+the right side with
+\begin{equation}
+ V\big/\bigl(p^nV+(B^{p^n}-1)V\bigr).                         \label{eq:ce9}
+\end{equation}
+Corestriction for the procyclic index-$p$ subgroup sends its
+generator value to the same value in the larger group's
+coinvariants. Thus the transitions are quotient maps, without an
+extra factor of $p$. Continuity implies $B^{p^n}-1\to0$; the
+denominators in \eqref{eq:ce9} are cofinal with the $p$-adic neighbourhoods.
+Their inverse limit is $V$.
+
+Restriction to the primitive lattice in $W$ gives, after inverting
+$p$, a nonzero quotient
+\begin{equation}
+ V_L\longrightarrow W^*(2),\qquad
+ \gamma|_{W^*(2)}=u^2/\alpha,
+\end{equation}
+of character $\chi^2e^{-1}$, or exponent $2-e$ in cyclotomic
+character notation. The restriction maps on the integral Hom
+modules are surjective, and the corresponding finite coinvariant
+quotients form a separated inverse system. By \eqref{eq:ce7} and the
+finite-level cup-surjectivity hypothesis, the image of $p^bV$ in
+every one of these quotients is zero. Its image in $W^*(2)$ must
+therefore be zero. This contradicts the nonzero torsionfree
+quotient. No compatible choice of finite-level cup expressions is
+needed, since $b$ was fixed before their selection. The contradiction
+proves \eqref{eq:ce1} for every root, including repeated ones.
+\end{proof}
+
+\section{Separation in the completed Magnus algebra}
+
+The following lemma upgrades the nonzero quadratic restrictions to
+injectivity on the entire free pro-$p$ group. Its coefficient ring is
+$\mathbb Z_p[[T]][1/p]$: each series has one common finite denominator.
+This bound permits evaluation at the cyclotomic weights and is preserved
+by all coordinate changes in a fixed assigned degree.
+\begin{lemma}[Separation of Magnus coefficients]\label{lem:rational-magnus}
+Let $p$ be odd and let $H$ be a second-countable free pro-$p$ group
+with commuting continuous actions of
+$\Gamma=\langle\gamma\rangle\simeq\mathbb Z_p$ and
+$\Delta\simeq\mathbb F_p^\times$. Let $c\in\Delta$ have order two,
+and put
+\begin{equation}
+ \Lambda=\mathbb Z_p[[\Gamma]],\qquad R=\Lambda[1/p],\qquad
+ M=H^{\rm ab}=U\oplus T,
+\end{equation}
+where $c=-1$ on $U$ and $c=1$ on $T$. Assume that $M$ is finitely
+generated over $\Lambda$, that $U[1/p]$ is free of rank one over $R$
+in every odd $\Delta$-character, and that $T$ is finite free over
+$\mathbb Z_p$, with every nonzero $T_e[1/p]$ cyclic over $R$.
+Assume also that abelian eigenclasses have exact $\Delta$-eigenlifts,
+including inside arbitrarily small $\Delta$-stable neighbourhoods.
+
+Let $\rho:H\to\mathcal U(\mathbb Q_p)$ be continuous and
+$\Gamma\times\Delta$-equivariant, where $\mathcal U$ is the
+weight-completed free prounipotent group on letters $s_m$ in all odd
+weights $m\ge3$. Suppose its image is Zariski dense in every finite
+weight quotient and, after a Levi normalization,
+\begin{equation}
+ \gamma s_m=u^m s_m,\qquad \delta s_m=\omega(\delta)^m s_m,
+\end{equation}
+where $u$ topologically generates $1+p\mathbb Z_p$.
+
+For each nonzero $T_e$, choose an integral multiple $v_e$ of a rational
+cyclic generator, an exact eigenlift $y_e\in H$, and its
+conjugates $y_{e,j}=\gamma^j y_e\gamma^{-j}$. Let $q_e(z)$ be the
+characteristic polynomial of $\gamma$ on $T_e$. In a rational
+$R$-basis of $U[1/p]$, let $C_{e;a,b}(T_1,T_2)$ be the odd--odd
+quadratic coefficients of the companion error formed from these conjugates. Suppose that
+for every root $\alpha$ of every $q_e$, there is a matching ordered
+odd pair $(a,b)$ for which
+\begin{equation}
+ C_{e;a,b}\left(T,\frac{\alpha}{1+T}-1\right)\ne0.
+                                                               \label{eq:gm1}
+\end{equation}
+Then $\rho$ is injective. All coefficient series here have a common
+finite denominator in each fixed assigned degree; no bound uniform
+over all degrees is required.
+\end{lemma}
+
+\begin{proof}
+\emph{A compact free basis.}
+A compact torsionfree $\mathbb Z_p$-module is a product of copies of
+$\mathbb Z_p$: its Pontryagin dual is a divisible $p$-primary group,
+hence a direct sum of copies of $\mathbb Q_p/\mathbb Z_p$.
+The abelianization of free $H$ is torsionfree and metrizable.
+Using the integral character idempotents, choose pointed convergent
+$\mathbb Z_p$-bases in the $U_a$, and finite bases in the $T_e$.
+The open quotient map $H\to M$ permits lifts of the convergent
+basis vectors tending to $1$. Apply the exact-eigenlift construction
+inside a nested sequence of $\Delta$-stable open neighbourhoods;
+it preserves both the abelian classes and their convergence.
+
+Let $F$ be the free pro-$p$ group on this pointed sequence and the
+finite even set. Its abelianization is the product module on those
+basis vectors, so the resulting map $F\to H$ is an isomorphism on
+abelianizations. Its compact image is Frattini-surjective and hence
+equals $H$. Indeed a proper closed subgroup of any pro-$p$ group is
+contained in a proper open subgroup and then in an index-$p$ subgroup,
+so cannot be Frattini-surjective. Since $H$ is free, the surjection
+has a continuous section. The section is inverse on abelianizations;
+its closed image is Frattini-surjective in $F$ and is all of $F$.
+Thus $F\simeq H$. This argument does not use an infinite-rank
+Hopficity assertion.
+
+Give the odd Magnus variables $X_i$ assigned degree $1$, and the
+finite even variables $Y_l$ assigned degree $2$. This Magnus
+expansion is injective. To see this directly, kill a tail of the
+convergent free sequence. Every finite quotient kills such a tail,
+so $H$ is the inverse limit of these finite-rank free groups.
+An ordinary finite-rank Magnus expansion detects every nonidentity
+element in some finite assigned degree. At each fixed degree the
+coefficient module is a finite sum of completed tensor products of
+$U$ and $T$, using these assigned degrees.
+
+\emph{Odd rational coordinates.}
+Choose a character-preserving isomorphism
+\begin{equation}
+ U[1/p]\simeq\bigoplus_{a\ {\rm odd}}Re_a.
+\end{equation}
+Finite generation over $\Lambda$ clears the denominators of this
+isomorphism and its inverse. Thus there are continuous integral
+maps between $U$ and $\Lambda^{(p-1)/2}$ whose two compositions are
+multiplication by the same power of $p$. Their completed tensor
+powers have compositions equal to the corresponding powers of that
+scalar. The tensor modules are torsionfree: in the product bases
+they are products of copies of $\mathbb Z_p$. Hence the maps are
+injective and become inverse isomorphisms after inverting $p$.
+Every fixed degree therefore has coordinates in
+\begin{equation}
+ \mathbb Z_p[[\Gamma^s]][1/p]
+   =\mathbb Z_p[[T_1,\ldots,T_s]][1/p],                       \label{eq:gm2}
+\end{equation}
+for its singleton positions and their character types. These are
+the Amice transforms of bounded measures on $\Gamma^s$.
+The denominator bound may depend on the degree, which causes no
+problem at a first nonzero degree.
+
+The target linear coefficient of weight $m$ is a continuous additive
+map from $M$ to $\mathbb Q_p$. Parity kills $T$, and character
+equivariance kills every $U_a$ except $a\equiv m\pmod{p-1}$.
+On the remaining rank-one $R$-module, $\Gamma$-equivariance makes
+it a scalar multiple of evaluation at $T=u^m-1$: check this on
+polynomials in $\gamma$ and then pass to bounded series by
+continuity. The scalar is nonzero by Zariski density, since the
+weight-$m$ abelian coordinate of the target cannot vanish on a
+dense image. Rescale $s_m$ by this scalar. Such weightwise rescaling
+is an automorphism of the completed free Lie algebra, because each
+finite weight quotient has finitely many generators. The singleton
+kernel is now exactly evaluation at $u^m-1$ in its matching type.
+
+\emph{Even companion coordinates.}
+Put $\lambda_e=\operatorname{rank}_{\mathbb Z_p}T_e$. The classes
+\begin{equation}
+ v_e,\gamma v_e,\ldots,\gamma^{\lambda_e-1}v_e
+\end{equation}
+are a rational basis, though they need not be an integral basis.
+The polynomial $q_e$ is monic integral, has unit constant term,
+and reduces to $(z-1)^{\lambda_e}$ modulo $p$, since the image of
+$\Gamma$ in $\operatorname{GL}(T_e/p)$ is a finite $p$-group.
+It is also the minimal polynomial, by rational cyclicity.
+
+The group conjugates $y_{e,j}$ have assigned degree at least $2$
+and target generator length at least $2$. Their assigned-degree-two
+parts have the form
+\begin{equation}
+ Z_{e,j}=\sum_l b_{j,l}Y_{e,l}+A_{e,j}(X),                    \label{eq:gm3}
+\end{equation}
+where $b$ is a finite invertible rational matrix and $A_{e,j}$ is
+a completed quadratic odd tensor. Before the odd coordinate change
+these coefficients are integral; afterwards they retain bounded
+denominators. There are no other terms of assigned degree two.
+The quadratic tensor is alternating, by the commutator description
+or primitiveness of the first Magnus coefficient.
+
+Replace the finite variables $Y$ by $Z$. This is a homogeneous
+triangular automorphism of the completed coefficient algebra:
+it fixes $X$ and its inverse is $Y=b^{-1}(Z-A(X))$.
+In each fixed degree only finitely many even variables occur,
+so both directions preserve a common finite denominator bound.
+In particular a first nonzero degree remains nonzero.
+This is a change in the rational tensor algebra, not a claim that
+the companion classes form an integral group basis.
+
+By definition of $Z_{e,j}$, its leading target is the length-two
+part of the group element $y_{e,j}$. For an ordered target pair
+$(m,n)$, put $z=u^{m+n}$. Its coefficient satisfies
+\begin{equation}
+ B_{e,j;m,n}=z^jB_{e,0;m,n}.
+\end{equation}
+Write $q_e(z)=z^{\lambda_e}-\sum_jc_{e,j}z^j$ and form
+\begin{equation}
+ E_e=(\gamma^{\lambda_e}y_e\gamma^{-\lambda_e})
+       \left(\prod_jy_{e,j}^{c_{e,j}}\right)^{-1}.
+\end{equation}
+Its abelian class is zero, so $E_e$ is in the closed derived
+subgroup. Its assigned-degree-two part is the odd alternating
+tensor $C_e$. There are no target length-one terms in any even
+factor, so comparison of length two gives exactly
+\begin{equation}
+ q_e(z)B_{e,0;m,n}
+   =C_{e;a,b}(u^m-1,u^n-1),\qquad
+ a\equiv m,\ b\equiv n\pmod{p-1}.                           \label{eq:gm4}
+\end{equation}
+This is the companion class of the extension in
+Lemma~\ref{lem:cup-pole-bridge}. Exact eigenlifts make its assigned
+degree-two character $e$; hence wrong-character pairs have zero
+coefficient. One can also obtain this zero from \eqref{eq:gm4} on the full
+residue grid and the successive analytic identity theorem.
+
+\emph{Partial fractions and continuity.}
+Pass to a finite splitting field $L$, with integers $\mathcal O$.
+All roots $\alpha$ satisfy $\alpha-1\in\mathfrak m_{\mathcal O}$.
+The finite-dimensional rational-function space with basis
+$z^j/q_e(z)$ has alternative basis
+\begin{equation}
+ (z-\alpha)^{-k},\qquad
+ 1\le k\le\operatorname{mult}_e(\alpha).
+\end{equation}
+The corresponding constant invertible change in the finite $Z$
+variables preserves assigned degree and bounded denominators in
+every fixed degree. Its even letter $(e,\alpha,k)$ has kernel
+\begin{equation}
+ \frac{C_{e;a,b}(T_1,T_2)}
+      {((1+T_1)(1+T_2)-\alpha)^k}.                          \label{eq:gm5}
+\end{equation}
+The numerator is common to all letters from the same companion
+component, even when roots repeat.
+
+There are finitely many positive integers $w$ such that $u^w$ is a
+root of some $q_e$. Restrict all test weights to a sufficiently
+large ordinary tail, excluding every vanishing pair denominator.
+In each fixed odd residue class this still includes sequences
+$m_0+(p-1)p^j$ with an interior $p$-adic accumulation point, for
+a sufficiently large fixed representative $m_0$.
+
+Substitution is legitimate at every finite arithmetic-weight cutoff.
+In the compact free basis, truncate its convergent sequence and
+apply finite-rank Magnus substitution. These truncations converge
+to the identity on $H$, since every finite group quotient kills a
+tail. The image of $H$ in the finite target quotient is compact,
+so its coefficient functions are bounded and continuous. Passing
+to the limit therefore gives the completed tensor substitution.
+The bounded rational coordinate changes preserve this statement in
+each fixed degree. In \eqref{eq:gm2} it is equivalently integration against
+bounded measures and the finite Fubini rule. We do not invoke a
+free pro-$p$ universal property for a noncompact rational group.
+
+\emph{Separation of a first nonzero degree.}
+Suppose $g\ne1$ and $\rho(g)=1$, and let $d$ be its first nonzero
+assigned degree after these invertible changes. A larger source
+degree cannot contribute to target length $d$. Its coefficient is
+a finite sum over ordered tilings of $d$ positions by singleton
+odd types and pairs labelled $(e,\alpha,k)$:
+\begin{equation}
+ \begin{gathered}
+ \sum_{\mathcal P}A_{\mathcal P}(T_i:\ i\text{ singleton})
+       \prod_{(j,e,\alpha,k)\in\mathcal P}
+       \frac{C_{e;a_j,a_{j+1}}(T_j,T_{j+1})}
+            {D_{j,\alpha}^{k}}=0,\\
+ D_{j,\alpha}=(1+T_j)(1+T_{j+1})-\alpha.
+ \end{gathered}                                            \label{eq:gm6}
+\end{equation}
+Every $A_{\mathcal P}$ has a common bounded denominator. Clear
+the finitely many denominators. Vanishing on the Cartesian grid
+of large odd test weights and the successive one-variable identity
+theorem make \eqref{eq:gm6} an identity in the fraction field of
+$\mathcal O[[T_1,\ldots,T_d]][1/p]$.
+
+Select a nonzero pattern with the largest number of pairs. Fix its
+pair positions $J$ and its roots and even characters, and among
+nonzero patterns with those data choose a componentwise maximal
+pole-order vector $(k_j)$. At each selected pair choose the ordered
+odd types in \eqref{eq:gm1}, and at each singleton its source type. These
+choices are independent because the pairs are disjoint.
+
+Set $S_j=D_{j,\alpha_j}$ for $j\in J$. Retain as base variables
+the singleton variables and the left variable in each selected pair.
+The substitutions
+\begin{equation}
+ T_{j+1}=\frac{\alpha_j+S_j}{1+T_j}-1
+\end{equation}
+are automorphisms of the complete integral power-series ring.
+Let $K_0$ be the fraction field of the bounded-denominator base
+ring. The identity embeds in $K_0[[S_j:j\in J]][S_j^{-1}:j\in J]$,
+with finite lower bounds on exponents. All other denominators are
+units in $K_0[[S_j]]$: a different root at the same position has
+nonzero constant root difference; a different pair position joins
+two distinct selected blocks, whose surviving variables are
+independent, so its product is not identically a prescribed root.
+Wrong even characters have already vanished.
+
+Take the coefficient of $\prod_{j\in J}S_j^{-k_j}$.
+A pattern missing a selected position or using a different root
+there has no negative exponent in that variable. A pattern
+containing all selected pairs and an extra pair has zero coefficient
+by the first maximality choice. Among remaining patterns, a
+contribution requires all pole orders to dominate $k_j$; the
+componentwise maximal choice excludes strict domination and an
+incomparable vector fails in at least one variable. Singleton types
+must match. Thus exactly one coefficient remains:
+\begin{equation}
+ A_{\mathcal P}(T_i:\ i\text{ singleton})
+ \prod_{j\in J}
+ C_{e_j;a_j,b_j}\left(T_j,\frac{\alpha_j}{1+T_j}-1\right).
+\end{equation}
+The first factor is nonzero and its coefficient ring injects into
+$K_0$; every other factor is nonzero by \eqref{eq:gm1}. Their product is
+nonzero in a field, a contradiction. If $J$ is empty, the same
+argument is the ordinary singleton moment identity. This proves
+injectivity of $\rho$.
+\end{proof}
+
+
+\section{The arithmetic consequence of Greenberg's hypothesis}
+
+We now verify all hypotheses of the two preceding lemmas for the
+cyclotomic Galois group. The following comparison puts the finite-level
+symbol theorem in the group-cohomological form required there.
+\begin{lemma}[Low-degree \'etale comparison]\label{lem:etale-prop}
+Let $S$ be a connected normal affine scheme, let
+$G=\pi_1^{\mathrm{\acute et}}(S)$, and let $P$ be its maximal
+pro-$p$ quotient. For a finite $p$-primary local coefficient module
+$A$ whose action factors through $P$, the natural maps give
+\begin{equation}
+ H^1(P,A)\simeq H^1_{\mathrm{\acute et}}(S,A),\qquad
+ H^2(P,A)\hookrightarrow H^2_{\mathrm{\acute et}}(S,A).
+\end{equation}
+They are compatible with cup products and with finite external
+automorphisms. Consequently generation of a character summand of
+the target $H^2$ by cups of $H^1$ classes gives the same generation
+in group cohomology and makes the displayed injection an
+isomorphism on that summand.
+\end{lemma}
+
+\begin{proof}
+Put $N=\ker(G\to P)$. An element of $H^1(N,A)^P$ is a continuous
+$P$-equivariant homomorphism $N\to A$, since $N$ acts trivially
+on $A$. If its image were nonzero, its kernel would be $G$-normal
+and the quotient of $G$ by that kernel would be an extension of
+$P$ by a nonzero finite $p$-group. This is a pro-$p$ quotient:
+every finite quotient has $p$-power order. It would be strictly
+larger than the maximal pro-$p$ quotient, a contradiction.
+Thus $H^1(N,A)^P=0$. The five-term Hochschild--Serre sequence gives
+\begin{equation}
+ H^1(P,A)\simeq H^1(G,A),\qquad
+ H^2(P,A)\hookrightarrow H^2(G,A).
+\end{equation}
+No finite-generation hypothesis on $N$ was used.
+
+The full universal finite \'etale tower over $S$ has zero $H^1$
+with finite locally constant coefficients: after trivializing the
+coefficients, an $H^1$ torsor is finite \'etale and becomes trivial
+at a later stage of the same tower. Finite \'etale objects and
+torsors descend under these affine limits. The Cartan--Leray
+spectral sequence for the tower therefore gives
+\begin{equation}
+ H^1(G,A)\simeq H^1_{\mathrm{\acute et}}(S,A),\qquad
+ H^2(G,A)\hookrightarrow H^2_{\mathrm{\acute et}}(S,A).
+\end{equation}
+This is only its low-degree consequence, and asserts no vanishing
+of the higher rows. The sequence, the profinite-tower passage and
+the simply connected $H^1$ vanishing are given explicitly in
+\cite[Theorem~14.9, Remark~14.10, Example~14.11 and
+Proposition~14.13, pp.~96--98]{MilneLEC2013}.
+All comparison maps are natural and respect cups.
+Lift each cup generator using the $H^1$ isomorphism and add its
+group cups; this proves surjectivity onto the asserted summand.
+Injectivity then identifies every group class in that summand with
+the lifted sum.
+\end{proof}
+
+\begin{proof}[Proof of the odd-prime assertion of Theorem~\ref{thm:greenberg-kernel}]
+At $p=3$, Sharifi's Theorem 1.1 and Brown's theorem apply, since $3$ is regular. Hence
+assume $p\ge5$. Put
+\begin{equation}
+ P=\operatorname{Gal}(\Omega_p/F_1),\quad
+ H=\operatorname{Gal}(\Omega_p/F_\infty),\quad
+ \Gamma=\operatorname{Gal}(F_\infty/F_1),\quad
+ M=H^{\rm ab}=U\oplus T.
+\end{equation}
+Choose the finite $\Delta$ lift by the coprime complement theorem.
+The fibre over a generator of $\Gamma$ is a $\Delta$-stable
+$H$-torsor because the cyclotomic quotient is abelian.
+The coprime identity $H^1(\Delta,H)=1$, obtained from the finite
+complement theorem and compactness, gives a $\Delta$-fixed lift
+$\gamma$. Its procyclic closure maps isomorphically to $\Gamma$
+and supplies the commuting section used above.
+Ferrero--Washington gives $\mu=0$ for this abelian cyclotomic tower
+\cite{FerreroWashington1979}. Iwasawa's Theorem 2 then states that
+$H$ is free pro-$p$ \cite[p.~273]{Iwasawa1981}.
+The maximal extension in that theorem is the extension $\Omega_p$
+used here: a finite $p$-extension over $F_\infty$ descends to a finite
+cyclotomic layer, and the normal closure of its descended
+$p$-extension over $F_1$ is again a $p$-extension unramified outside
+$p$.
+The finite-level Kummer sequence makes $H^1(P,\mathbb F_p)$
+finite dimensional, so $P$ is finitely generated and $H$ is
+second-countable. Adjust a finite generating set of $P$ by powers
+of the chosen $\Gamma$ section to obtain elements of $H$.
+Together with $\gamma$ they generate $P$; their closed normal
+closure is $H$, since the remaining quotient is the given
+procyclic quotient. Their abelian classes therefore generate $M$
+over $\Lambda=\mathbb Z_p[[\Gamma]]$.
+Section~\ref{sec:rational-image} gives the continuous dense rational
+representation and its Levi normalization as required in
+Lemma~\ref{lem:rational-magnus}. The exact eigenlift construction
+is \cite[Lemma~4, p.~3 of arXiv:math/0104116v2]{Sharifi2002}; performing it inside
+stable neighbourhoods preserves convergence. We verify the module and cup hypotheses.
+
+\emph{Rational odd module.}
+The ring $R=\Lambda[1/p]$ is a PID. Indeed $\Lambda$ is a
+two-dimensional regular local UFD, and its only height-two prime
+contains $p$. Thus $R$ is a one-dimensional noetherian UFD and
+hence a PID. It remains the ring of bounded-denominator series,
+not $\mathbb Q_p[[T]]$.
+
+For an odd character $a\ne\omega,\omega^{-1}$, apply the full
+duality calculation in Wake--Wang-Erickson's Proposition~2.2.6
+with $\theta=\omega a^{-1}$. It gives
+\begin{equation}
+ \operatorname{Ext}^1_\Lambda(M_a^{\#}(1),\Lambda)=X_\theta,
+ \qquad
+ \operatorname{Ext}^2_\Lambda(M_a^{\#}(1),\Lambda)=0.           \label{eq:gm7}
+\end{equation}
+Here $M$ is their $p$-ramified module $\mathfrak X$, whereas $X$
+on the right is unramified. Since $\theta$ is even, Greenberg
+makes the right-hand side zero after inverting $p$. Ext commutes
+with this localization for finitely generated modules. Over a PID,
+the Ext group into the ring of a finitely generated torsion summand
+is nonzero unless that summand is zero. Thus $M_a[1/p]$ is free.
+Its rank is one by the local/global unit exact sequence in the
+same proof: local units have rank one in this character, global
+minus units contribute only roots of unity, and the unramified
+quotient is torsion. The inversion $\#$ and Tate twist transport
+the ring by automorphisms, so undoing them preserves freeness
+\cite[Proposition~2.2.6 and proof, pp.~3--4]{WakeWangErickson2017}.
+
+The two excluded characters can be calculated directly.
+Coleman's exact sequence at tame level one is
+\begin{equation}
+ 0\longrightarrow\mathbb Z_p(1)\longrightarrow U_{\rm loc}
+ \longrightarrow\mathbb Z_p[[\Delta\times\Gamma]]
+ \longrightarrow\mathbb Z_p(1)\longrightarrow0
+\end{equation}
+\cite[Theorem~5.5.31, p.~148; Proposition~6.1.1,
+pp.~151--152]{SharifiIwasawaNotes}.
+Global minus units are exactly the root-of-unity term, and
+Stickelberger gives $X_\omega=X_{\omega^{-1}}=0$; the latter
+exceptional statement is explicitly recorded in
+\cite[proof of Lemma~5.2.7, p.~13]{WakeWangErickson2017}.
+The $\omega^{-1}$ component of $M$ is consequently free of rank
+one. In the $\omega$ component, quotienting the local units by
+their root-of-unity kernel identifies $M_\omega$ with
+\begin{equation}
+ \ker(\Lambda\longrightarrow\mathbb Z_p(1))
+     =(\gamma-u)\Lambda,
+\end{equation}
+again free of rank one. The two characters are distinct for
+$p\ge5$. The valuation direction at the unique prime above $p$
+is even and does not affect this calculation. We have therefore
+proved the required rational freeness for every odd character.
+
+\emph{Rational even module.}
+Kummer duality identifies $T=M^+$ up to finite kernel and cokernel
+with $(X^-)^\iota(1)$
+\cite[Proposition~3.4.7 and Corollary~3.4.8,
+p.~92]{SharifiIwasawaNotes}.
+Ferrero--Washington makes it finitely generated over $\mathbb Z_p$,
+and freeness of $H$ excludes $\mathbb Z_p$-torsion. Thus $T$ is
+finite free. Greenberg implies that $X^-$ is pseudocyclic
+character by character, by the exact local/global unit sequence and
+Iwasawa adjunction in
+\cite[Corollary~2.1.3 and Conjecture~2.1.5 with the following
+explanation, p.~8]{WakeWangEricksonPseudo2018}.
+Finite kernels and cokernels vanish after inverting $p$, so every
+$T_e[1/p]$ is cyclic. This allows repeated roots; it does not assert
+integral cyclicity without Vandiver.
+
+\emph{Integral symbol surjectivity under Greenberg.}
+Fix an even character $\theta\ne1,\omega^2$ and put
+$\chi=\omega^{-1}\theta$. Wake--Wang-Erickson's
+Corollary~8.1.3(2) assumes exactly
+\begin{equation}
+ \begin{gathered}
+ X_\chi(1)[1/p]\text{ cyclic over }(\Lambda/\xi_\chi)[1/p],\\
+ X_\theta\otimes_\Lambda(\Lambda/\xi_\chi)[1/p]=0.
+ \end{gathered}                                            \label{eq:gm8}
+\end{equation}
+The localization in the second condition is essential.
+Both conditions follow from the just stated consequences of
+Greenberg. The conclusion is an integral isomorphism
+\begin{equation}
+ \varpi:(\mathcal H^-_\theta/I_\theta\mathcal H^-_\theta)
+           /(p\text{-primary torsion})
+       \xrightarrow{\ \sim\ }X_\chi(1),                    \label{eq:gm9}
+\end{equation}
+so the original $\varpi$ is surjective
+\cite[Corollary~8.1.3 and complete proof,
+pp.~48--49]{WakeWangEricksonPseudo2018}.
+The source proves this with repeated roots: the derivative identity
+makes the error nilpotent in each cyclic local factor, rather than
+requiring the derivative to be invertible. Thus \eqref{eq:gm9} does not
+insert a simple-root hypothesis.
+
+Fukaya--Kato, \S7.1.10, deduce from this surjectivity that for every
+$r\ge1$ the finite-level $\theta$ component is generated by the
+symbols
+\begin{equation}
+ \{1-\zeta_{p^r}^{a},1-\zeta_{p^r}^{b}\}.
+\end{equation}
+Their \S7.1.9 identifies its reduction modulo $p^r$ with the
+corresponding class-group quotient, and their \S6.1.5 shows that
+at tame level one the only excluded even characters are
+$1,\omega^2$
+\cite[\S6.1.5, p.~76; \S\S7.1.8--7.1.10,
+p.~86]{FukayaKato2012}.
+Those excluded characters correspond to the unramified components
+$X_{\omega^{-1}}$ and $X_\omega$, which are zero. Norm projections
+from $X^-$ onto each finite minus class group are surjective, so
+the omitted finite targets are zero as well
+\cite[Proposition~3.4.1 and proof,
+pp.~90--91]{SharifiIwasawaNotes}.
+Components with unit characteristic power series are also zero:
+the source's $X^-$ is $p$-torsionfree, and a finite such module must
+vanish. We apply the nonunit running assumption of the modular
+source only to the nonzero components. Hence every even target is
+covered.
+
+\emph{All finite group levels and coefficient conventions.}
+Let
+\begin{equation}
+ P_n=H\rtimes\Gamma^{p^n},\qquad
+ S_n=\operatorname{Spec}\mathcal O_{F_{n+1}}[1/p].
+\end{equation}
+The maximal pro-$p$ quotient of $\pi_1(S_n)$ is exactly $P_n$.
+Indeed the normal closure over $F_1$ of any finite Galois
+$p$-extension of $F_{n+1}$ unramified outside $p$ remains a
+$p$-extension: its conjugate compositum over $F_{n+1}$ has
+$p$-group Galois group, and $F_{n+1}/F_1$ has $p$-power degree.
+Thus it lies in the fixed field $\Omega_p$ used throughout.
+
+At $F_{n+1}$, the finite-level symbol theorem gives generation
+with coefficients $p^{n+1}$. Reduction gives generation with
+coefficients $p^n$, exactly as in Lemma~\ref{lem:cup-pole-bridge}.
+The class-group quotient description in FK \S7.1.9 makes this
+reduction explicit. The Brauer contribution is zero: these fields
+have no real places, and only one finite prime is omitted, so the
+global invariant condition forces its lone possible local
+invariant to vanish.
+
+For a $p$-unit $v$, the quotient $v/c(v)$ is a global unit of
+absolute value one at every embedding and hence is a root of
+unity. Consequently the negative $c$ part of the $p$-unit group
+modulo $p^n$ is cyclic. Its alternating self-cup is zero because
+$2$ is a unit; mixed-parity cups lie in the odd target. Thus the
+even target is generated by cups of $c$-even unit classes. This
+argument does not identify the whole of $H^1$ with units and does
+not use Vandiver.
+
+Apply Lemma~\ref{lem:etale-prop}. Each Kummer class has a unique
+lift to $H^1(P_n,\mathbb Z/p^n(1))$, and group $H^2$ injects into
+\'etale $H^2$. Lifting the even symbol generators makes this
+injection surjective on the even part and gives precisely
+\begin{equation}
+ H^2(P_n,\mathbb Z/p^n(2))^+
+  =\bigl\langle f\smile g\mid
+       f,g\in H^1(P_n,\mathbb Z/p^n(1))^+\bigr\rangle.       \label{eq:gm10}
+\end{equation}
+This treats every $n\ge1$; no compatibility of expressions as sums
+of cups is needed. Scalar extension to the integers of a finite
+splitting field preserves the assertion, since that ring is finite
+free over $\mathbb Z_p$.
+
+Lemma~\ref{lem:cup-pole-bridge} now gives the nonzero companion
+restriction \eqref{eq:gm1} for every root of every even component, including
+repeated roots. Its dual root is $u^2/\alpha$ and its dual character
+is $\omega^{2-e}$, so the inversion and both Tate twists match
+the symbol target. Lemma~\ref{lem:rational-magnus} proves
+injectivity on the entire $H$.
+
+Finally an element in the kernel of the original pro-$p$ tripod
+action is cyclotomically trivial, hence lies in $H$. Functorial
+rational completion sends it to $1$ under $\rho$, and the proved
+injectivity makes it trivial. This is exactly
+$\Omega_p^*=\Omega_p$.
+\end{proof}
+\section{Vandiver and the verified finite range}
+
+We prove directly that Vandiver supplies the Iwasawa hypothesis in
+Theorem~\ref{thm:greenberg-kernel}.
+
+\begin{lemma}\label{lem:persistence}
+Let $L/K$ be cyclic of odd prime degree $p$, ramified at precisely one
+finite prime, which is totally ramified. If $\operatorname{Cl}(K)\{p\}=0$,
+then $\operatorname{Cl}(L)\{p\}=0$.
+\end{lemma}
+\begin{proof}
+Let $E/L$ be the Hilbert $p$-class field. Its uniqueness makes $E/K$
+Galois, and $G=\operatorname{Gal}(E/K)$ is a finite $p$-group. The
+inertia group $I$ above the ramified prime has order $p$, since
+$E/L$ is unramified. Let $N$ be its normal closure in $G$. All other
+inertia groups at that prime are conjugate, and every other prime
+is unramified; an odd-degree extension introduces no infinite-place
+ramification. Thus $E^N/K$ is everywhere unramified. If $G/N$ were
+nontrivial, it would have a cyclic quotient of order $p$, contradicting
+class field theory and the hypothesis on $K$. Hence $N=G$.
+The Frattini quotient of $G$ is consequently generated by the image
+of one generator of $I$, so $G$ is cyclic. Its subgroup $I$ is then
+normal, whence $G=N=I$ and $E=L$.
+\end{proof}
+
+At every step $F_{r+1}^+/F_r^+$ the sole ramified finite prime is the
+prime above $p$, and it is totally ramified. Lemma~\ref{lem:persistence}
+therefore gives $\operatorname{Cl}(F_r^+)\{p\}=0$ at all layers when
+Vandiver holds at $F_1$. Extension and norm of ideals identify
+$\operatorname{Cl}(F_r^+)\{p\}$ with
+$\operatorname{Cl}(F_r)\{p\}^+$: their composites are multiplication
+by $2$ and $1+c$, and $2$ is invertible on a $p$-group. Taking norm
+limits gives $X_p^+=0$. The odd-prime assertion already proved now
+establishes the Vandiver part of Theorem~\ref{thm:greenberg-kernel}.
+
+Hart--Harvey--Ong verify Vandiver for every odd prime below $2^{31}$
+\cite[Section 1, item (2)]{HartHarveyOng2017}. Their computation
+proves the stated numerical
+corollary. No assertion about an unverified prime is needed for that
+finite range.
+
+
+\section{What remains open}
+
+The theorem determines the kernel field at every prime for which its
+arithmetic hypothesis has been established. For an odd prime with
+$X_p^+$ finite, the proof passes through the following specific maps:
+the modular symbol map to the cyclotomic class module; its projections
+to finite-level cup products; the edge map for
+$1\to H\to H\rtimes\Gamma^{p^n}\to\Gamma^{p^n}\to1$;
+and the coefficients of the induced rational outer representation.
+The two Tate twists in the edge map send an eigenvalue $\alpha$ to
+$u^2/\alpha$. This identifies the arithmetic direction tested by each
+pole, including generalized eigenspaces for repeated roots.
+
+To establish the same conclusion for every prime by this argument one
+must establish the required arithmetic module structure and cup
+nonvanishing beyond the finiteness hypothesis. The proof here does not
+provide that step. Vanishing of a particular quadratic coefficient
+would also require further analysis: a group element can have a
+nonzero image at higher generator length. Thus no converse to the
+criterion is asserted.
+
+There is a related integral question concerning generation of the
+weight-graded Lie algebra by specified Soul\'e elements. The map from
+a group to its weight-graded Lie algebra, followed by tensoring with
+$\mathbb Q_p$, can discard integral indices. Our separation argument
+uses nonzero rational leading coefficients; it never proves that those
+coefficients are $p$-adic units. Accordingly the kernel-field theorem
+makes no integral generation assertion. Sharifi treats the maps from
+free integral generators to the filtered group and graded Lie algebra
+explicitly in \cite[Sections 1 and 4]{Sharifi2002}.
+
+\section*{Provenance and checks}
+
+The mathematics, and the text of Sections 3 to 8, are the work of GPT-6 Astra (ChatGPT Pro mode), in research
+runs of November 2026; the same model reread its proofs and its applications of the cited theorems. Sections 1
+and 2 and this note were written by Claude (Claude Fable 5.2 at effort max), as editor, who also removed the
+treatment of the prime $2$ from the text and changed it in no other mathematical respect.
+
+Claude Opus 5.5 at effort high checked every step of Lemma~\ref{lem:persistence} and of the deduction of
+$X_p^+=0$ from it in the present text (23 November). In earlier versions of the argument it checked the
+separation lemma and the deduction of the theorem at primes satisfying Vandiver's conjecture (21 and 22
+November). On 23 November it then checked the present text of Sections 4 to 6 step by step, with
+\cite[Proposition~2.2.6]{WakeWangErickson2017}, \cite[Corollary~2.1.3, Conjecture~2.1.5 and
+Corollary~8.1.3(2)]{WakeWangEricksonPseudo2018} and \cite[\S6.1.5 and \S\S7.1.9--7.1.10]{FukayaKato2012} opened at
+those places, and found no mathematical error; the statements cited from \cite{MilneLEC2013},
+\cite{SharifiIwasawaNotes} and \cite{Iwasawa1981} were not opened again. The editor, Claude Fable 5.2 at effort max, then refereed
+Sections 3 to 6 against the cited theorems of Hain--Matsumoto, Wake--Wang-Erickson and Fukaya--Kato and found no error. Claude Opus 5.5 at effort max read the whole note and checked Section 7 in full. No human has checked the proofs or this text.
+
+The sources were opened by the run, which recorded for each the pages used; the locators in the text are its
+own. For this note the editor read the abstracts of \cite{Sharifi2002} and \cite{IshiiKernel2026}; the literature
+check of 23 November opened \cite{Sharifi2002}, \cite{Sharifi2019}, \cite{IshiiKernel2026}, Sharifi's 2011
+paper on his conjectures, \cite{FukayaKato2012} and both papers of Wake and Wang-Erickson at the source. What
+Section 1 says about \cite{AndersonIhara1988} follows \cite[p.~2]{IshiiKernel2026}, Ihara's inclusion follows
+\cite[p.~1]{Sharifi2002}, and the sentences on the programme are the editor's summary.
+
+The records of the checks are at the permanent page of this work, WB-0006:
+
+{\raggedright\smallskip\noindent\url{\workbenchurl}.\par}
+
+\smallskip
+This text is dedicated to the public domain (CC0 1.0).
+
+\begingroup
+\small
+\begin{thebibliography}{99}
+\bibitem{AndersonIhara1988}
+G.~Anderson and Y.~Ihara, \emph{Pro-$l$ branched coverings of $\mathbb P^1$ and higher circular $l$-units},
+Ann. of Math. (2) \textbf{128} (1988), 271--293.
+\url{https://doi.org/10.2307/1971443}.
+The kernel question is on p.~272, question (a); its statement is also reproduced in
+\cite[p.~2]{IshiiKernel2026}.
+
+\bibitem{Brown2012}F.~Brown, \emph{Mixed Tate motives over $\mathbb Z$},
+Ann. of Math. \textbf{175} (2012), 949--976.
+\url{https://annals.math.princeton.edu/wp-content/uploads/annals-v175-n2-p10-p.pdf}.
+
+\bibitem{FerreroWashington1979}
+B.~Ferrero and L.~C.~Washington,
+\emph{The Iwasawa invariant $\mu_p$ vanishes for abelian number fields},
+Ann. of Math. (2) \textbf{109} (1979), 377--395.
+\url{https://doi.org/10.2307/1971116}.
+
+\bibitem{FukayaKato2012}T.~Fukaya and K.~Kato,
+\emph{On conjectures of Sharifi}, author preprint,
+15 August 2012, 121 pages.
+\url{https://www.math.ucla.edu/~sharifi/sharificonj.pdf}.
+Locators in this author version:
+\S\S6.1.4--6.1.8, pp.~76--77;
+\S7.1.3, pp.~84--85;
+Conjecture~7.1.8 and \S\S7.1.9--7.1.10, p.~86;
+Theorem~7.2.8 and \S\S7.2.10--7.2.12, p.~89;
+Lemma~10.2.2 and \S10.2.3, p.~107.
+
+\bibitem{HainMatsumoto2001}R.~Hain and M.~Matsumoto, \emph{Weighted completion of Galois groups
+and Galois actions on the fundamental group of $\mathbb P^1-\{0,1,\infty\}$},
+arXiv:math/0006158v2, 11 August 2001.
+\url{https://arxiv.org/pdf/math/0006158}.
+
+\bibitem{HartHarveyOng2017}W. B. Hart, D. Harvey and W. Ong,
+Irregular primes to two billion,
+\emph{Math. Comp.} 86 (2017), 3031--3049.
+\url{https://doi.org/10.1090/mcom/3211}.
+Author preprint:
+\url{https://arxiv.org/abs/1605.02398}.
+Section 1, item (2), verifies Vandiver for every odd prime
+\(\ell<2^{31}\).
+
+\bibitem{Ihara1986}
+Y.~Ihara, \emph{Profinite braid groups, Galois representations and complex multiplications},
+Ann. of Math. (2) \textbf{123} (1986), 43--106.
+\url{https://doi.org/10.2307/1971352}.
+
+\bibitem{IshiiKernel2026}S.~Ishii, \emph{On the kernels of the pro-$p$ outer Galois representations
+associated to once-punctured CM elliptic curves},
+arXiv:2312.04196v3, 6 January 2026.
+\url{https://arxiv.org/pdf/2312.04196}.
+
+\bibitem{Iwasawa1981}K.~Iwasawa, \emph{Riemann--Hurwitz formula and $p$-adic Galois
+representations for number fields},
+Tohoku Math. J. \textbf{33} (1981), 263--288.
+\url{https://www.jstage.jst.go.jp/article/tmj1949/33/2/33_2_263/_pdf/-char/en}.
+
+\bibitem{MilneLEC2013}J.~S.~Milne,
+\emph{Lectures on \textup{\'Etale} Cohomology},
+version~2.21, 22 March 2013, 202 pages.
+\url{https://www.jmilne.org/math/CourseNotes/LEC.pdf}.
+Theorem~14.9, Remark~14.10, Example~14.11 and Proposition~14.13,
+printed pp.~96--98.
+
+\bibitem{Sharifi2002}R.~T.~Sharifi, \emph{Relationships between conjectures on the structure
+of pro-$p$ Galois groups unramified outside $p$},
+Proc. Sympos. Pure Math. \textbf{70} (2002), 275--284.
+Author's 13-page version: \url{https://www.math.ucla.edu/~sharifi/publ/galstr.pdf};
+arXiv:math/0104116v2.
+
+\bibitem{Sharifi2019}R.~T.~Sharifi, \emph{Soul\'e characters in the work of Ihara}, RIMS K\^oky\^uroku
+\textbf{2120} (2019), 221--228.
+\url{https://www.kurims.kyoto-u.ac.jp/~kyodo/kokyuroku/contents/pdf/2120-11.pdf}.
+
+\bibitem{SharifiIwasawaNotes}
+R.~T.~Sharifi, \emph{Iwasawa Theory}, author lecture notes, 184 pp.,
+retrieved 23 November 2026.
+\url{https://www.math.ucla.edu/~sharifi/notes/iwasawa.pdf}.
+Locators: Propositions 3.4.1 and 3.4.7, Corollary 3.4.8, pp.~90--92;
+Theorem 5.5.31, p.~148; Proposition 6.1.1, pp.~151--152.
+
+\bibitem{WakeWangErickson2017}P.~Wake and C.~Wang-Erickson,
+\emph{Ordinary pseudorepresentations and modular forms},
+Proc. Amer. Math. Soc. Ser.~B \textbf{4} (2017), 53--71.
+\url{https://doi.org/10.1090/bproc/29}.
+Final author preprint arXiv:1510.01661v4, 30 January 2017:
+\url{https://arxiv.org/pdf/1510.01661v4}.
+Locators in that version: \S2.1, pp.~2--3;
+Proposition~2.2.6, p.~4; Theorem~4.2.8, pp.~10--11;
+Corollaries~5.1.1--5.1.2, p.~11; Lemma~5.2.7, p.~13.
+
+\bibitem{WakeWangEricksonPseudo2018}P.~Wake and C.~Wang-Erickson,
+\emph{Pseudo-modularity and Iwasawa theory},
+Amer. J. Math. \textbf{140} (2018), no.~4, 977--1040.
+\url{https://doi.org/10.1353/ajm.2018.0022}.
+Author version: arXiv:1505.05128v3,
+7 September 2017, 54 pages:
+\url{https://arxiv.org/pdf/1505.05128v3}.
+Locators in that version: Corollary~2.1.3 and Conjecture~2.1.5, p.~8;
+Corollaries~8.1.2--8.1.3, pp.~48--49;
+Theorem~8.2.3, pp.~50--51.
+\end{thebibliography}
+\endgroup
+\end{document}
