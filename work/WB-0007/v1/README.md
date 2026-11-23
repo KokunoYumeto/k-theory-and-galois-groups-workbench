@@ -1,6 +1,6 @@
 # Relation (IV) of Nakamura and Schneps holds on the profinite Grothendieck-Teichmüller group, with an application to the two elliptic points of the modular curve
 
-WB-0007, version 1, deposited on Hexagon on 23 November 2026.
+WB-0007, version 1: [hexagon:2611.00940](https://hexagonmath.org/2611.00940), deposited 23 November 2026.
 
 Nakamura and Schneps (2000) defined a subgroup of the profinite Grothendieck-Teichmüller group GT-hat by two
 relations, (III') and (IV), that hold for Galois elements, and left open whether it is all of GT-hat; Lochak,

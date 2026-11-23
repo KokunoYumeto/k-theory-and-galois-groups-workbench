@@ -10,7 +10,7 @@ Grothendieck-Teichmüller group, much of it in answer to questions of Grothendie
 | Number | Work | State | Records |
 |---|---|---|---|
 | [WB-0006](https://github.com/KokunoYumeto/mathematics-workbenches/blob/main/works/WB-0006.md) | [The question of Anderson and Ihara on the pro-p Galois action on the projective line minus three points, at every prime satisfying Vandiver's conjecture](https://hexagonmath.org/2611.00939) | deposited, version 1 | [`work/WB-0006/v1`](work/WB-0006/v1/README.md) |
-| [WB-0007](https://github.com/KokunoYumeto/mathematics-workbenches/blob/main/works/WB-0007.md) | Relation (IV) of Nakamura and Schneps holds on the profinite Grothendieck-Teichmüller group, with an application to the two elliptic points of the modular curve | version 1, being deposited | [`work/WB-0007/v1`](work/WB-0007/v1/README.md) |
+| [WB-0007](https://github.com/KokunoYumeto/mathematics-workbenches/blob/main/works/WB-0007.md) | [Relation (IV) of Nakamura and Schneps holds on the profinite Grothendieck-Teichmüller group, with an application to the two elliptic points of the modular curve](https://hexagonmath.org/2611.00940) | deposited, version 1 | [`work/WB-0007/v1`](work/WB-0007/v1/README.md) |
 
 ## How this repository works
 
