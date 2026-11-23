@@ -1,6 +1,6 @@
 # The question of Anderson and Ihara on the pro-p Galois action on the projective line minus three points, at every prime satisfying Vandiver's conjecture
 
-WB-0006, version 1, deposited on Hexagon on 23 November 2026.
+WB-0006, version 1: [hexagon:2611.00939](https://hexagonmath.org/2611.00939), deposited 23 November 2026.
 
 Anderson and Ihara asked (Ann. of Math. 128 (1988), p. 272) whether the fixed field of the kernel of the outer action of
 the absolute Galois group of Q on the pro-p fundamental group of the projective line minus three points is the maximal
