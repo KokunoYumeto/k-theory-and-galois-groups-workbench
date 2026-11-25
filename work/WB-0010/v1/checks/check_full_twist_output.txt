@@ -1,0 +1,6 @@
+n = 2: delta_n^n = delta_{n-1}^{n-1} * y_n: True; the two factors commute: True; fixes x_1...x_n: True
+n = 3: delta_n^n = delta_{n-1}^{n-1} * y_n: True; the two factors commute: True; fixes x_1...x_n: True
+n = 4: delta_n^n = delta_{n-1}^{n-1} * y_n: True; the two factors commute: True; fixes x_1...x_n: True
+n = 5: delta_n^n = delta_{n-1}^{n-1} * y_n: True; the two factors commute: True; fixes x_1...x_n: True
+n = 6: delta_n^n = delta_{n-1}^{n-1} * y_n: True; the two factors commute: True; fixes x_1...x_n: True
+ALL AS CLAIMED

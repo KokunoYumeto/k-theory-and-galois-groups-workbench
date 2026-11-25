@@ -1,0 +1,5 @@
+p = 2: boundary components 6, rank of their span 5 (= 3p-1: True), sum of all is zero: True, H_1 has rank 5, every b1+b2+b3 nonzero: True
+p = 3: boundary components 9, rank of their span 8 (= 3p-1: True), sum of all is zero: True, H_1 has rank 10, every b1+b2+b3 nonzero: True
+p = 5: boundary components 15, rank of their span 14 (= 3p-1: True), sum of all is zero: True, H_1 has rank 26, every b1+b2+b3 nonzero: True
+p = 7: boundary components 21, rank of their span 20 (= 3p-1: True), sum of all is zero: True, H_1 has rank 50, every b1+b2+b3 nonzero: True
+ALL AS CLAIMED

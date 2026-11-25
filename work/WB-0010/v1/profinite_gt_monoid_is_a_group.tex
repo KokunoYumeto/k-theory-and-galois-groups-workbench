@@ -1,0 +1,307 @@
+\documentclass[11pt]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage{xurl}
+\setlength{\emergencystretch}{2em}
+
+\newcommand{\recordurl}{https://github.com/KokunoYumeto/mathematics-workbenches}
+
+\newtheorem{theorem}{Theorem}
+\renewcommand{\thetheorem}{\Alph{theorem}}
+\newtheorem{corollaryx}[theorem]{Corollary}
+\newtheorem{propositionx}[theorem]{Proposition}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{proposition}[thm]{Proposition}
+\newtheorem{corollary}[thm]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[thm]{Definition}
+\newtheorem{example}[thm]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[thm]{Remark}
+
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Zh}{\widehat{\mathbb Z}}
+\newcommand{\Fh}{\widehat F}
+\newcommand{\GT}{\widehat{\mathrm{GT}}}
+\newcommand{\GTz}{\widehat{\mathrm{GT}}_0}
+\newcommand{\GTm}{\underline{\widehat{\mathrm{GT}}}}
+\newcommand{\PaB}{\mathsf{PaB}}
+\newcommand{\PaBh}{\widehat{\mathsf{PaB}}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\ab}{\mathrm{ab}}
+\newcommand{\ph}{\varphi}
+
+\title[The profinite Grothendieck--Teichm\"uller monoid is a group]{The profinite Grothendieck--Teichm\"uller monoid is a group, on a question of Lochak and Schneps}
+\author{}
+\date{25 November 2026}
+
+\begin{document}
+
+\begin{abstract}
+An element of the profinite Grothendieck--Teichm\"uller group $\GT$ of Drinfeld is a pair $(\lambda,f)$, with $\lambda$ a unit of $\Zh$ and $f$ in the free profinite group $\Fh_2$ on $x$ and $y$, that satisfies three relations and for which $x\mapsto x^\lambda$, $y\mapsto f^{-1}y^\lambda f$ is an automorphism of $\Fh_2$. Lochak and Schneps asked in 2006 whether this last requirement follows from the others, and whether it holds with no relation at all (Question~1.1 of their list of open problems). We prove that it follows, and from less: if $\lambda\in1+2\Zh$ and $f\in\Fh_2$ satisfy the two-cycle and three-cycle relations (I) and (II), then $\lambda$ is a unit and the endomorphism is an automorphism. The pentagon relation is not used. Relation (I) alone does not suffice: for $\lambda=1$ and $f=xyx^{-1}y^{-1}$ the endomorphism is not surjective. It follows that the Grothendieck--Teichm\"uller monoid, in the profinite form of Horel and of Boavida de Brito, Horel and Robertson, is equal to its group of units; that every endomorphism of the profinite operad of parenthesized braids that fixes the objects is an automorphism; and, by their theorems, that every homotopy endomorphism of the profinite completion of the little $2$-discs operad, or of the genus zero surface operad, is a homotopy automorphism. The proof counts boundary components of finite covers in homology. An endomorphism of the profinite completion of the fundamental group of a compact surface with boundary that sends every boundary generator to a conjugate of a unit power of a boundary generator, bijectively on boundary components, is an automorphism; on a sphere with at least three holes the exponents of such an endomorphism are equal, and are zero or a unit. The criterion for unit exponents and the case of unit $\lambda$ were produced by GPT-6 Astra (ChatGPT Pro mode) and checked by Claude Opus 5.5 at effort high. Claude Fable 5.2 at effort max checked them again, found the statements for exponents that are not assumed to be units and the example above, and wrote this text. Claude Opus 5.5 at effort max checked these additions independently. No human has checked any of it.
+\end{abstract}
+
+\maketitle
+
+\section{The question and the results}
+
+\subsection{The group and the question}
+Let $\Fh_2$ be the free profinite group on $x$ and $y$, and put $z=(xy)^{-1}$. For $f\in\Fh_2$ and elements $a,b$ of a profinite group, $f(a,b)$ denotes the image of $f$ under the continuous homomorphism $x\mapsto a$, $y\mapsto b$. For $\lambda\in\Zh$ and $f\in\Fh_2$ let $\ph_{\lambda,f}$ be the continuous endomorphism of $\Fh_2$ with
+\[
+ \ph_{\lambda,f}(x)=x^{\lambda},\qquad \ph_{\lambda,f}(y)=f^{-1}y^{\lambda}f .
+\]
+We consider the relations
+\begin{itemize}
+\item[(I)] $f(x,y)\,f(y,x)=1$;
+\item[(II)] $f(z,x)\,z^{m}\,f(y,z)\,y^{m}\,f(x,y)\,x^{m}=1$, where $m=(\lambda-1)/2$;
+\item[(III)] the pentagon relation, an equation in the profinite pure braid group on four strands \cite[Definition~7.2]{BHR}.
+\end{itemize}
+Relation (II) requires $\lambda\in1+2\Zh$. Drinfeld's group $\GT$ \cite[\S4]{D} is, in the usual description, the set of pairs $(\lambda,f)$ with $\lambda\in\Zh^\times$ and $f$ in the closed commutator subgroup $\Fh_2'$ that satisfy (I), (II), (III) and for which $\ph_{\lambda,f}$ is an automorphism; it is a group under the composition of these automorphisms. The pairs with $\lambda\in\Zh^\times$, $f\in\Fh_2'$ and $\ph_{\lambda,f}$ an automorphism that satisfy (I) and (II) form the larger group $\GTz$ of Harbater and Schneps \cite{HS}.
+
+Lochak and Schneps recall this definition in their list of open problems and write of the requirement that $\ph_{\lambda,f}$ be invertible that ``there is no effective way to ensure this'' \cite[introduction]{LS}. Their first question \cite[\S1, Question~1.1]{LS} is whether, for $(\lambda,f)\in\Zh^\times\times\Fh_2'$, the endomorphism $\ph_{\lambda,f}$ is always an automorphism or can be non-invertible, and the same question when $(\lambda,f)$ satisfies (I), (II), (III). They add that the question concerns the full profinite setting only: in the pronilpotent and proalgebraic settings invertibility is detected at once.
+
+\subsection{The results}
+
+\begin{theorem}\label{thmA}
+Let $\lambda\in1+2\Zh$ and $f\in\Fh_2$ satisfy relations \textup{(I)} and \textup{(II)}. Then $\lambda\in\Zh^\times$, and $\ph_{\lambda,f}$ is an automorphism of $\Fh_2$.
+\end{theorem}
+
+The pentagon relation is not used, and $f$ is not assumed to lie in $\Fh_2'$.
+
+\begin{corollaryx}\label{corB}
+The requirement that $\ph_{\lambda,f}$ be an automorphism is redundant in the definitions of $\GT$ and of $\GTz$:
+\[
+ \GTz=\{(\lambda,f)\in\Zh^\times\times\Fh_2' : \textup{(I), (II)}\},\qquad
+ \GT=\{(\lambda,f)\in\Zh^\times\times\Fh_2' : \textup{(I), (II), (III)}\}.
+\]
+\end{corollaryx}
+
+This answers the second half of Question~1.1 of \cite{LS}, and it does so already for (I) and (II). The first half has a negative answer, and relation (I) by itself changes nothing:
+
+\begin{propositionx}\label{propC}
+Let $\lambda=1$ and $f=[x,y]^k$ with $k\in\{1,2\}$, where $[x,y]=xyx^{-1}y^{-1}$. Then $f\in\Fh_2'$, the pair $(1,f)$ satisfies relation \textup{(I)}, and $\ph_{1,f}$ is not surjective.
+\end{propositionx}
+
+For the Grothendieck--Teichm\"uller monoid we follow Horel \cite[Definition~7.1]{Hor} and Boavida de Brito, Horel and Robertson \cite[Definition~7.2]{BHR}: $\GTm$ is the set of the $\ph_{\lambda,f}$ with $(\lambda,f)\in\Zh\times\Fh_2$ satisfying (I), (II), (III), a monoid under composition, and the group $\GT$ is its group of units. By a theorem of Drinfeld, $\GTm$ is the monoid of the endomorphisms of the operad $\PaBh$ of profinite parenthesized braids that induce the identity on objects \cite[Theorem~7.2]{Hor}, \cite[Proposition~7.3]{BHR}.
+
+\begin{corollaryx}\label{corD}
+The following hold.
+\begin{enumerate}
+\item[(a)] $\GTm=\GT$: every element of the Grothendieck--Teichm\"uller monoid is invertible in it, and every pair $(\lambda,f)\in\Zh\times\Fh_2$ satisfying \textup{(I), (II), (III)} has $\lambda\in\Zh^\times$.
+\item[(b)] Every endomorphism of the operad $\PaBh$ that induces the identity on objects is an automorphism.
+\item[(c)] The monoid of endomorphisms of the profinite completion of the little $2$-discs operad in the homotopy category of weak operads in profinite spaces \cite[Theorem~8.4]{Hor}, and the monoids of path components of the derived endomorphism spaces of the profinite completions of the genus zero surface operad, without and with operations of arity zero \cite[Theorems~8.4 and~11.1]{BHR}, are groups, isomorphic to $\GT$.
+\end{enumerate}
+\end{corollaryx}
+
+Statement (c) is (a) read through the cited theorems, which identify these three monoids with $\GTm$.
+
+Theorem~\ref{thmA} rests on a statement about surface groups. Let $S$ be a compact connected oriented surface of genus $g$ with $m\ge1$ boundary components, and $G=\pi_1(S)$. It has generators $a_1,b_1,\dots,a_g,b_g,c_1,\dots,c_m$ and the one relation
+\begin{equation}\label{eq:surface}
+ [a_1,b_1]\cdots[a_g,b_g]\,c_1\cdots c_m=1,
+\end{equation}
+where $c_j$ is freely homotopic to the $j$-th boundary component with its boundary orientation. We call $c_1,\dots,c_m$ the boundary generators. Let $F=\widehat G$ be the profinite completion.
+
+\begin{theorem}\label{thmE}
+Let $\ph$ be a continuous endomorphism of $F$. Suppose there are a permutation $\tau$ of $\{1,\dots,m\}$, elements $g_j\in F$ and exponents $\mu_j\in\Zh$ with
+\[
+ \ph(c_j)=g_j\,c_{\tau(j)}^{\,\mu_j}\,g_j^{-1}\qquad(1\le j\le m).
+\]
+\begin{enumerate}
+\item[(a)] If $m\ge2$, the exponents $\mu_j$ are all equal. If every $\mu_j$ is a unit of $\Zh$, then $\ph$ is an automorphism.
+\item[(b)] If $g=0$ and $m\ge3$, the common exponent is $0$ or a unit of $\Zh$.
+\end{enumerate}
+\end{theorem}
+
+For the annulus, $g=0$ and $m=2$, one has $F=\Zh$ and every $\mu\in\Zh$ occurs; so (b) needs $m\ge3$. We do not know whether (b) holds in positive genus.
+
+\subsection{What is whose}
+\emph{The groups and the question.} $\GT$ is Drinfeld's \cite{D}; $\GTz$ is Harbater and Schneps's \cite{HS}; the question is Lochak and Schneps's \cite{LS}.
+
+\emph{The monoid.} The monoid, and its identification with the endomorphisms of parenthesized braids, are Drinfeld's \cite[\S4]{D}; the profinite operadic statements used here are those of Horel \cite{Hor} and of Boavida de Brito, Horel and Robertson \cite{BHR}. Fresse observes in his survey that in the Malcev setting a pair is invertible exactly when $\lambda\in\Q^\times$, and that ``we do not have such a simple characterization of the isomorphisms in the profinite setting'' \cite[\S2.6]{F}. Dolgushev and Guynee define the gentle version of the group as the invertible elements of a monoid \cite[Definition~2.5]{DG}. Corollary~\ref{corD}(a) says that in the profinite setting every pair is invertible.
+
+\emph{Here.} Theorems~\ref{thmA} and~\ref{thmE}, Proposition~\ref{propC} and Corollaries~\ref{corB} and~\ref{corD}. We do not know a reference for Theorem~\ref{thmE}; part~(a) is a statement of a kind that specialists of profinite surface groups may know, and we make no claim about it.
+
+\subsection{What has been checked}\label{sec:checked}
+\emph{Checked by a second reader.} Theorem~\ref{thmE}(a), Lemma~\ref{lem:third}, and with them Theorem~\ref{thmA} for $\lambda$ assumed to be a unit: each step was followed by Claude Opus 5.5 at effort high, and again by Claude Fable 5.2 at effort max, which had proved Theorem~\ref{thmE}(a) independently before reading the proof it was given. Theorem~\ref{thmE}(b), hence the clause $\lambda\in\Zh^\times$ of Theorem~\ref{thmA} and of Corollary~\ref{corD}(a), the two examples of Proposition~\ref{propC}, and the deduction of Corollary~\ref{corD}: each step was followed by Claude Opus 5.5 at effort max. That reader also recomputed Lemma~\ref{lem:third} and recomputed the examples by hand in both conventions for the product of permutations. It read \cite[Definition~7.1, Theorem~7.2, Proposition~7.4, Lemma~7.5, Theorem~8.4]{Hor} and \cite[Definition~7.2, Proposition~7.3, Theorems~8.4 and~11.1]{BHR} at the statements used. The proofs of Theorems~\ref{thmA} and~\ref{thmE}, of Lemma~\ref{lem:third}, of Proposition~\ref{propC} and of Corollary~\ref{corD} were read once more, step by step, by Claude Opus 5.5 at effort max before posting.
+
+\emph{Not checked by a second reader.} The two derivations of $\phi_n(z_n)=z_n^{\,\lambda}$ in Remark~\ref{rem:braids}, which is not used in the proofs.
+
+\emph{Used as published.} Corollary~\ref{corD}(b) uses \cite[Proposition~7.3]{BHR}, and (c) uses the three theorems cited in it. We read their statements and the proof of the first, and did not check the proofs.
+
+\subsection{Proof overview}\label{sec:overview}
+The difficulty is that $\Fh_2$ has proper closed subgroups that map onto its abelianization, so that surjectivity cannot be read off from abelian or nilpotent quotients; this is why the question concerns the full profinite setting only. The idea is to think of $\Fh_2$ as the fundamental group of a pair of pants, whose three boundary generators are $x$, $y$ and $z$, and to use all three. Relations (I) and (II) give, by a short computation that inverts nothing, that $\ph_{\lambda,f}(z)$ is a conjugate of $z^\lambda$ (Lemma~\ref{lem:third}). So $\ph_{\lambda,f}$ sends each boundary generator to a conjugate of its $\lambda$-th power.
+
+If the image of such an endomorphism were contained in a proper open subgroup $U$, then $U$ would be the group of a finite cover $S'$ of the pair of pants, and the images of $x$, $y$, $z$ would be, up to conjugation in $U$, powers of loops around three boundary components of $S'$, one over each boundary component of the pair of pants. Their product is $1$, so a combination of three boundary classes vanishes in $H_1(S';\Zh)$. But the boundary classes of a surface satisfy one relation only, that their sum is zero. For unit $\lambda$ this forces $S'$ to have three boundary components, each of degree one, so the cover is trivial (Theorem~\ref{thmE}(a)). If a prime $p$ divides $\lambda$, the same count in the cover with group $(\Z/p)^2$, which has $3p$ boundary components, forces $\lambda=0$ (Theorem~\ref{thmE}(b)). Finitely generated profinite groups are Hopfian, so surjectivity is enough.
+
+Section~\ref{sec:surfaces} proves Theorem~\ref{thmE}, Section~\ref{sec:pairs} proves Theorem~\ref{thmA} and Corollary~\ref{corB}, Section~\ref{sec:example} proves Proposition~\ref{propC}, and Section~\ref{sec:monoid} proves Corollary~\ref{corD}.
+
+\section{Endomorphisms of profinite surface groups that preserve the boundary}\label{sec:surfaces}
+
+We keep the notation of Theorem~\ref{thmE}. An open subgroup $U$ of $F$ is the closure of $U_0=U\cap G$, which has the same index in $G$, and $U$ is the profinite completion of $U_0$, because the profinite topology of $G$ induces on a subgroup of finite index its full profinite topology. Let $S_U\to S$ be the connected covering with group $U_0$; it is a compact oriented surface, and $U^{\ab}=H_1(S_U;\Z)\otimes\Zh$, since $U_0$ is free of finite rank.
+
+\begin{lemma}\label{lem:boundary}
+Let $S'$ be a compact connected oriented surface with boundary components $\beta_1,\dots,\beta_r$, $r\ge1$, oriented as boundary. The kernel of $\Z^r\to H_1(S';\Z)$, $e_i\mapsto[\beta_i]$, is generated by $(1,\dots,1)$, and the kernel of $\Zh^r\to H_1(S';\Z)\otimes\Zh$ is $\Zh\cdot(1,\dots,1)$.
+\end{lemma}
+
+\begin{proof}
+In the exact sequence $H_2(S',\partial S';\Z)\to H_1(\partial S';\Z)\to H_1(S';\Z)$ the first group is generated by the fundamental class, whose boundary is $\sum_i[\beta_i]$. The second statement follows because $\Zh$ is torsion-free, hence flat over $\Z$.
+\end{proof}
+
+\begin{lemma}\label{lem:lift}
+Let $U$ be an open subgroup of $F$, let $1\le k\le m$, $e\ge1$, $a\in G$, $\nu\in\Zh$, $v\in U$, and suppose that $\xi=a\,c_k^{\,e}a^{-1}$ lies in $U_0$ and that no smaller positive power of $a\,c_ka^{-1}$ does. Then there is a boundary component $b$ of $S_U$ of degree $e$ over the $k$-th boundary component of $S$ such that the class of $v^{-1}\xi^{\nu}v$ in $U^{\ab}$ is $\nu\,[b]$.
+\end{lemma}
+
+\begin{proof}
+The loop $a\,c_k^{\,e}a^{-1}$ lifts to a closed loop in $S_U$ from the base point: along the lift of $a$, then along the lift of $c_k^{\,e}$, which closes up for the first time after $e$ turns, and back. So it is freely homotopic in $S_U$ to a boundary component $b$ over the $k$-th boundary component, of degree $e$, traversed once in the boundary orientation, and $[\xi]=[b]$ in $H_1(S_U;\Z)$. The map $t\mapsto\xi^t$ from $\Zh$ to $U$ is a continuous homomorphism, so the class of $\xi^\nu$ in $U^{\ab}$ is $\nu[\xi]$; conjugation by $v\in U$ does not change classes in $U^{\ab}$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thmE}(a)]
+\emph{Equal exponents.} In $F^{\ab}=H_1(S;\Z)\otimes\Zh$, relation \eqref{eq:surface} and the hypothesis give $\sum_j\mu_j[c_{\tau(j)}]=0$. By Lemma~\ref{lem:boundary} the vector with entry $\mu_{\tau^{-1}(k)}$ at $k$ is a multiple of $(1,\dots,1)$. So the $\mu_j$ are equal.
+
+\emph{Surjectivity.} Let every $\mu_j$ be a unit, and suppose that $H=\ph(F)$ is not $F$. It is a closed subgroup, hence contained in an open subgroup $U\ne F$ \cite[\S2.1]{RZ}; let $d=[F:U]\ge2$. Fix $j$ and put $k=\tau(j)$. The coset $Ug_j$ is open and $G$ is dense, so there is $a_j\in G\cap Ug_j$; put $v_j=a_jg_j^{-1}\in U$. Then
+\[
+ v_j\,\ph(c_j)\,v_j^{-1}=a_j\,c_k^{\,\mu_j}a_j^{-1}=\bigl(a_jc_ka_j^{-1}\bigr)^{\mu_j}\in U .
+\]
+Since $\mu_j$ is a unit, the closed subgroup generated by $(a_jc_ka_j^{-1})^{\mu_j}$ contains $a_jc_ka_j^{-1}$. So $a_jc_ka_j^{-1}\in U\cap G=U_0$, and Lemma~\ref{lem:lift} with $e=1$ gives a boundary component $b_j$ of $S_U$, of degree one over the $k$-th boundary component of $S$, with
+\[
+ [\ph(c_j)]=\mu_j\,[b_j]\qquad\text{in }U^{\ab}.
+\]
+The components $b_1,\dots,b_m$ are distinct, because they lie over distinct boundary components of $S$.
+
+Apply $\ph$ to \eqref{eq:surface}. All the $\ph(a_i),\ph(b_i),\ph(c_j)$ lie in $U$, so the commutators die in $U^{\ab}$, and $\sum_j\mu_j[b_j]=0$ there. By Lemma~\ref{lem:boundary} the vector with entries $\mu_j$ at the components $b_j$ and $0$ at the other boundary components of $S_U$ is a multiple of $(1,\dots,1)$. Its entries $\mu_j$ are units, so it has no entry $0$: the $b_j$ are all the boundary components of $S_U$. Hence over each boundary component of $S$ there is exactly one boundary component of $S_U$, and it has degree one. But the degrees of the boundary components of $S_U$ over a given boundary component of $S$ add up to $d$. So $d=1$, a contradiction, and $\ph$ is surjective.
+
+\emph{Injectivity.} A surjective continuous endomorphism $\ph$ of a finitely generated profinite group $F$ is injective \cite[\S2.5]{RZ}: for each $n$ the set of open subgroups of index $n$ is finite, and $V\mapsto\ph^{-1}(V)$ maps it injectively, hence bijectively, to itself; so $\ker\ph$ lies in every open subgroup.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thmE}(b)]
+Now $g=0$ and $m\ge3$, so that $G$ is generated by $c_1,\dots,c_m$ with the relation $c_1\cdots c_m=1$. By (a) the exponents are equal; call the common value $\mu$. Suppose that a prime $p$ divides $\mu$, say $\mu=p\nu$ with $\nu\in\Zh$. We show that $\nu=0$.
+
+Let $U$ be the kernel of $F\to H_1(S;\Z/p)\cong(\Z/p)^{m-1}$. It is open and normal, and $c_k^{\,p}\in U$ for all $k$. Hence $\ph(c_j)=g_j(c_{\tau(j)}^{\,p})^{\nu}g_j^{-1}\in U$ for all $j$, and since the $c_j$ generate $F$ topologically, $\ph(F)\subset U$. The class of $c_k$ in $H_1(S;\Z/p)$ has order $p$, because $m\ge2$. So every boundary component of $S_U$ has degree $p$ over its image, there are $p^{m-2}$ of them over each boundary component of $S$, and $S_U$ has $r=m\,p^{m-2}$ boundary components. As $m\ge3$, we have $r>m$.
+
+Fix $j$, put $k=\tau(j)$, and choose $a_j\in G\cap Ug_j$ and $v_j=a_jg_j^{-1}\in U$ as before. Then $\ph(c_j)=v_j^{-1}\xi_j^{\,\nu}v_j$ with $\xi_j=a_jc_k^{\,p}a_j^{-1}\in U_0$, and Lemma~\ref{lem:lift} with $e=p$ gives a boundary component $b_j$ of $S_U$ over the $k$-th boundary component of $S$ with $[\ph(c_j)]=\nu[b_j]$ in $U^{\ab}$. The $b_j$ are distinct. Applying $\ph$ to $c_1\cdots c_m=1$ gives
+\[
+ \nu\cdot\bigl([b_1]+\dots+[b_m]\bigr)=0\qquad\text{in }H_1(S_U;\Z)\otimes\Zh .
+\]
+Since $r>m$, Lemma~\ref{lem:boundary} shows that $w=[b_1]+\dots+[b_m]$ is not zero in the free abelian group $H_1(S_U;\Z)$. Some coordinate of $w$ in a basis is a nonzero integer $n$, and $\nu n=0$ in $\Zh$ gives $\nu=0$, because $\Zh$ is torsion-free. So $\mu=0$.
+
+Thus a nonzero $\mu$ is divisible by no prime, that is, $\mu\in\Zh^\times$.
+\end{proof}
+
+\section{The third boundary relation, and the proof of Theorem A}\label{sec:pairs}
+
+\begin{lemma}\label{lem:third}
+Let $\lambda\in1+2\Zh$, $m=(\lambda-1)/2$, and let $f\in\Fh_2$ satisfy \textup{(I)} and \textup{(II)}. Then
+\[
+ x^{\lambda}\cdot f^{-1}y^{\lambda}f=h\,(xy)^{\lambda}\,h^{-1}\qquad\text{with }h=x^{m}f(z,x).
+\]
+Hence $\ph_{\lambda,f}(z)=h\,z^{\lambda}h^{-1}$.
+\end{lemma}
+
+\begin{proof}
+Put $A=f(x,y)$, $B=f(y,z)$, $C=f(z,x)$. Relations (I) and (II) are identities in $\Fh_2$, so they remain true after any continuous substitution, and $f(gag^{-1},gbg^{-1})=g\,f(a,b)\,g^{-1}$. Relation (II) reads
+\begin{equation}\label{eq:h1}
+ C\,z^{m}\,B\,y^{m}\,A\,x^{m}=1 .
+\end{equation}
+Substitute $(x,y)\mapsto(x,z)$. Then $z=(xy)^{-1}$ is replaced by $w=(xz)^{-1}$, and since $z^{-1}=xy$ we have $w=xyx^{-1}=z^{-1}yz$. Relation (II) becomes $f(w,x)\,w^{m}f(z,w)\,z^{m}f(x,z)\,x^{m}=1$. By (I) and the conjugation rule,
+\[
+ f(x,z)=C^{-1},\qquad f(w,x)=x\,f(y,x)\,x^{-1}=xA^{-1}x^{-1},\qquad f(z,w)=z^{-1}f(z,y)\,z=z^{-1}B^{-1}z ,
+\]
+and $w^{m}=xy^{m}x^{-1}$. Using $x^{-1}z^{-1}=y$ we get
+\begin{equation}\label{eq:h2}
+ x\,A^{-1}y^{m+1}B^{-1}z^{m+1}C^{-1}x^{m}=1 .
+\end{equation}
+From \eqref{eq:h1}, $B\,y^{m}A=z^{-m}C^{-1}x^{-m}$; from \eqref{eq:h2}, $A^{-1}y^{m+1}B^{-1}=x^{-m-1}C\,z^{-m-1}$. Multiplying the second by the first, and using $2m+1=\lambda$,
+\[
+ A^{-1}y^{\lambda}A=x^{-m-1}\,C\,z^{-\lambda}\,C^{-1}x^{-m}.
+\]
+Multiply on the left by $x^{\lambda}=x^{2m+1}$ and use $z^{-\lambda}=(xy)^{\lambda}$:
+$x^{\lambda}A^{-1}y^{\lambda}A=(x^{m}C)(xy)^{\lambda}(x^{m}C)^{-1}$. The left side is $\ph_{\lambda,f}(xy)$.
+\end{proof}
+
+No step of this computation inverts $\ph_{\lambda,f}$ or uses that $\lambda$ is a unit.
+
+\begin{proof}[Proof of Theorem~\ref{thmA}]
+The group $\Fh_2$ is the profinite completion of the fundamental group of a sphere with three holes, with boundary generators $c_1=x$, $c_2=y$, $c_3=z$ and the relation $xyz=1$. By Lemma~\ref{lem:third}, $\ph=\ph_{\lambda,f}$ satisfies $\ph(c_j)=g_jc_j^{\,\lambda}g_j^{-1}$ with $g_1=1$, $g_2=f^{-1}$, $g_3=h$. By Theorem~\ref{thmE}(b), $\lambda$ is $0$ or a unit; it is not $0$, because $\lambda\in1+2\Zh$. By Theorem~\ref{thmE}(a), $\ph$ is an automorphism.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{corB}]
+By Theorem~\ref{thmA} every pair in either right-hand set has $\ph_{\lambda,f}\in\Aut(\Fh_2)$, which is the requirement left out.
+\end{proof}
+
+\section{Relation (I) alone}\label{sec:example}
+
+\begin{proof}[Proof of Proposition~\ref{propC}]
+Since $[y,x]=[x,y]^{-1}$, we have $f(y,x)=f(x,y)^{-1}$ for $f=[x,y]^k$: relation (I) holds identically. Let $q$ be a continuous surjection of $\Fh_2$ onto a finite group $Q$. If $\ph_{1,f}$ were surjective, then $q(x)$ and $q(f)^{-1}q(y)q(f)$ would generate $Q$.
+
+For $k=1$ take $Q=A_4$, $q(x)=(1\,2\,3)$, $q(y)=(1\,2\,4)$; these generate $A_4$. Then $q(f)=[q(x),q(y)]=(1\,2)(3\,4)$, and conjugating $(1\,2\,4)$ by this involution gives $(2\,1\,3)=(1\,3\,2)=q(x)^{-1}$. So the image of $\ph_{1,f}(\Fh_2)$ in $A_4$ is the group of order $3$ generated by $q(x)$.
+
+For $k=2$ take $Q=S_3$, $q(x)=(1\,2)$, $q(y)=(1\,3)$. Then $[q(x),q(y)]$ is a $3$-cycle $t$, $q(f)=t^2=t^{-1}$, and $q(f)^{-1}q(y)q(f)=t\,(1\,3)\,t^{-1}$ is the transposition $(1\,2)=q(x)$. So the image has order $2$.
+
+These values do not depend on whether permutations are composed from the left or from the right.
+\end{proof}
+
+\begin{remark}
+The pair $(1,[x,y])$ does not satisfy (II), by Theorem~\ref{thmA}. So Question~1.1 of \cite{LS} has the answer: not invertible in general, also under (I); invertible under (I) and (II).
+\end{remark}
+
+\section{The monoid and the operad}\label{sec:monoid}
+
+\begin{lemma}\label{lem:monoid}
+Let $\Gamma$ be a profinite group and $M\subset\Gamma$ a closed subset that contains $1$ and is closed under multiplication. Then $M$ is a subgroup.
+\end{lemma}
+
+\begin{proof}
+Let $\gamma\in M$. If $N$ is an open normal subgroup of $\Gamma$ and $n\ge[\Gamma:N]$, then $\gamma^{n!}\in N$, so $\gamma^{n!-1}\in\gamma^{-1}N$. Hence $\gamma^{-1}$ is a limit of the elements $\gamma^{n!-1}$, $n\ge2$, of $M$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{corD}]
+(a) Let $P$ be the set of pairs $(\lambda,f)\in\Zh\times\Fh_2$ satisfying (I), (II), (III); it is closed, so compact, and its elements have $\lambda\in1+2\Zh$. By Theorem~\ref{thmA} every pair in $P$ has $\lambda\in\Zh^\times$ and $\ph_{\lambda,f}\in\Aut(\Fh_2)$. The group $\Aut(\Fh_2)$ is profinite, a base of neighbourhoods of the identity being the subgroups of automorphisms that act trivially on $\Fh_2/N$, for $N$ characteristic and open \cite[\S4.4]{RZ}. The map $(\lambda,f)\mapsto\ph_{\lambda,f}$ from $P$ to $\Aut(\Fh_2)$ is continuous: modulo such an $N$ of index $n$, the automorphism depends only on $\lambda$ modulo $n!$ and on $f$ modulo $N$. So $\GTm$, its image, is compact, hence closed. It contains the identity and is closed under composition, being a monoid \cite[Definition~7.1]{Hor}, \cite[Definition~7.2]{BHR}. By Lemma~\ref{lem:monoid} it is a group, so it equals its group of units $\GT$. For readers who take the monoid to consist of the pairs: $\ph_{\lambda,f}$ determines $(\lambda,f)$ for $(\lambda,f)\in P$ \cite[Definition~7.2]{BHR}, \cite[Lemma~7.5 and Proposition~7.4]{Hor}, so the inverse of $\ph_{\lambda,f}$ in $\GTm$ is $\ph_{\lambda',f'}$ for a unique pair $(\lambda',f')\in P$, which is the inverse of $(\lambda,f)$ in the monoid of pairs.
+
+(b) By \cite[Proposition~7.3]{BHR}, the monoid of the endomorphisms of $\PaBh$ that fix the objects is $\GTm$, which is a group by (a).
+
+(c) The cited theorems identify each of the three monoids with $\GTm$.
+\end{proof}
+
+\begin{remark}\label{rem:classical}
+The group $\GT$ of \cite{Hor} and \cite{BHR}, the units of $\GTm$, is the group $\GT$ of Section~1: an element $(\lambda,f)$ of $\GTm$ has $f\in\Fh_2'$ by relation (III) \cite[Proposition~7.4]{Hor}, and by Corollaries~\ref{corB} and~\ref{corD}(a) both groups are the set of pairs in $\Zh^\times\times\Fh_2'$ satisfying (I), (II), (III). We use (III) in the form of \cite[Definition~7.2]{BHR}; its agreement with the form used in \cite{LS} is part of the cited literature and is not rechecked here.
+\end{remark}
+
+\begin{remark}[A route through braid groups]\label{rem:braids}
+The statement that $\lambda$ is a unit was first obtained, for endomorphisms $\Phi$ of $\PaBh$ fixing the objects, by another argument, which we record with the state of its inputs; it is not used above. Such a $\Phi$ sends the braiding in arity $2$ to its $\lambda$-th power, and for every $n$ it induces a continuous endomorphism $\phi_n$ of the profinite braid group $\widehat B_n$ that is the identity on the symmetric group; this uses that $\Phi$ fixes the objects and commutes with the relabelling action of the symmetric groups, and the description of the groupoids $\PaBh(n)$ \cite[Definitions~6.2 and~6.11]{BHR}, \cite[Proposition~4.23 and Corollary~4.24]{Hor}. Let $\delta_n=\sigma_1\cdots\sigma_{n-1}$ and let $z_n=\delta_n^{\,n}$ be the full twist, which is central \cite{Ch}. One has $\phi_n(z_n)=z_n^{\,\lambda}$. If a prime $p$ divided $\lambda$, the element $\phi_p(\delta_p)\,z_p^{-\lambda/p}$ of $\widehat B_p$ would have $p$-th power $1$ and would map to a $p$-cycle. But $\widehat B_p$ is torsion-free: pure braid groups are good \cite[Corollary~5.11]{Hor}, a group with a good normal subgroup of finite index is good, by comparison of the two Hochschild--Serre spectral sequences, and a good group of finite cohomological dimension has a profinite completion of finite $p$-cohomological dimension for every $p$, which has no element of order $p$ \cite[Chap.~I, \S\S2.6 and~3.3]{Se}.
+
+State of the inputs. The torsion argument was followed by Claude Opus 5.5 at effort high and by Claude Fable 5.2 at effort max. The formula $\phi_n(z_n)=z_n^{\,\lambda}$ was derived in the first version from the ribbon structure \cite[Definition~6.4, Propositions~7.7 and~8.1]{BHR}; that derivation has not been checked. It also follows by induction on $n$ from the operadic composition of $\PaBh$, since $z_n$ is the product of the commuting elements $z_{n-1}$, on the first $n-1$ strands, and $y_n=\sigma_{n-1}\cdots\sigma_2\sigma_1^2\sigma_2\cdots\sigma_{n-1}$, which is the full twist on two strands with its first strand replaced by $n-1$ parallel strands; the identity $\delta_n^{\,n}=\delta_{n-1}^{\,n-1}y_n$ was verified by program for $n\le6$ in Artin's action on the free group, and the induction has had no second reader. This route uses the operad in every arity, hence the pentagon, and gives the unit property only under (I), (II), (III); Theorem~\ref{thmA} needs (I) and (II) only.
+\end{remark}
+
+\section{What remains open}
+\begin{enumerate}
+\item Whether Theorem~\ref{thmE}(b) holds in positive genus: is the exponent of a boundary-preserving endomorphism of a profinite surface group with boundary, other than the annulus, always $0$ or a unit?
+\item Whether Theorem~\ref{thmE} is in the literature. We have not found it.
+\item Question~1.2 of \cite{LS}, whether the abelianization of $\GT$ is given by $\lambda$, is not touched.
+\item A check by a human reader.
+\end{enumerate}
+
+\section*{Note on method}
+The criterion for unit exponents, Theorem~\ref{thmE}(a), the third boundary relation, Lemma~\ref{lem:third}, and with them Theorem~\ref{thmA} for unit $\lambda$, were produced by GPT-6 Astra (ChatGPT Pro mode) in a research run on Grothendieck's \emph{La Longue Marche \`a travers la th\'eorie de Galois} (November 2026), which also noted that they answer the constrained form of Question~1.1 of \cite{LS}, gave an example in $A_5$ for $f=[x,y]^2$ with no relation imposed, and obtained Corollary~\ref{corD}(a) by the route of Remark~\ref{rem:braids}. Claude Opus 5.5 at effort high followed each step of these proofs and recomputed the example (24 November 2026). Claude Fable 5.2 at effort max proved Theorem~\ref{thmE}(a) independently, recomputed Lemma~\ref{lem:third}, and wrote this text (25 November 2026); it added Theorem~\ref{thmE}(b), which removes the hypothesis that $\lambda$ is a unit and makes the pentagon unnecessary for Corollary~\ref{corD}(a), the observation that relation (I) holds for the examples, the smaller examples of Proposition~\ref{propC}, and the inductive derivation in Remark~\ref{rem:braids}. It read \cite{LS} at the definition and at Question~1.1, \cite{BHR} at Definitions 6.2, 6.10, 6.11, Lemma~7.1, Definition~7.2, Proposition~7.3 with its proof, and Theorems 8.4 and 11.1, and \cite{Hor} at Remark~4.20, Proposition~4.23, Corollary~4.24, Definition~7.1, Theorem~7.2, Proposition~7.4 and Theorem~8.4, in the arXiv versions named in the references. It did not open \cite{D}, \cite{HS}, \cite{DG}, \cite{RZ}, \cite{Se} or \cite{Ch}; \cite{D} is cited as in \cite{Hor} and \cite{BHR}, and \cite{DG} was opened at Definition~2.5 by Claude Opus 5.5 at effort max. Claude Opus 5.5 at effort max then checked Theorem~\ref{thmE}(b), the clause $\lambda\in\Zh^\times$ of Theorem~\ref{thmA}, Proposition~\ref{propC} and the deduction of Corollary~\ref{corD} independently (25 November 2026). It opened \cite{LS}, \cite{Hor}, \cite{BHR} and \cite{F} at the statements used, confirmed the section numbers of \cite{RZ} in the publisher's table of contents and those of \cite{Se} in its third edition, and checked the bibliographic data of \cite{Ch}, which was not opened; it found no reference for Theorem~\ref{thmE} in a search of the literature on profinite surface groups and free profinite groups. Before posting, \cite{HS} was opened at the definition of $\GTz$ (\S0.1, p.~3118). The statements inside the sections of \cite{RZ} that are cited were not opened; the facts used from them are standard. The programs behind Proposition~\ref{propC}, the count of boundary components in the proof of Theorem~\ref{thmE}(b) for $p\le7$, and the braid identity of Remark~\ref{rem:braids} are kept with the records. No human has checked this note, and nothing in it is formalized. Our text is dedicated to the public domain under CC0~1.0. The records of the checks are kept at \url{\recordurl}.
+
+\begin{thebibliography}{99}
+\bibitem{BHR} P.~Boavida de Brito, G.~Horel and M.~Robertson, \emph{Operads of genus zero curves and the Grothendieck--Teichm\"uller group}, Geom.\ Topol.\ \textbf{23} (2019), 299--346. Numbering of arXiv:1703.05143v1 (15 March 2017): Definitions 6.2, 6.4, 6.10, 6.11, Lemma~7.1, Definition~7.2, Propositions 7.3, 7.7, 8.1, Theorems 8.4, 11.1.
+\bibitem{Ch} W.-L.~Chow, \emph{On the algebraical braid group}, Ann.\ of Math.\ (2) \textbf{49} (1948), 654--658.
+\bibitem{DG} V.~A.~Dolgushev and J.~J.~Guynee, \emph{GT-shadows for the gentle version of the Grothendieck--Teichmueller group}, arXiv:2401.06870v2, Definition~2.5.
+\bibitem{D} V.~G.~Drinfel'd, \emph{On quasitriangular quasi-Hopf algebras and on a group that is closely connected with $\mathrm{Gal}(\overline{\mathbf Q}/\mathbf Q)$}, Algebra i Analiz \textbf{2} (1990), no.~4, 149--181; \S4.
+\bibitem{F} B.~Fresse, \emph{Little discs operads, graph complexes and Grothendieck--Teichm\"uller groups}, in: Handbook of Homotopy Theory (H.~Miller, ed.), CRC Press/Chapman and Hall, 2019, 407--444; arXiv:1811.12536v1, \S2.6.
+\bibitem{HS} D.~Harbater and L.~Schneps, \emph{Fundamental groups of moduli and the Grothendieck--Teichm\"uller group}, Trans.\ Amer.\ Math.\ Soc.\ \textbf{352} (2000), 3117--3148; \S0.1, p.~3118.
+\bibitem{Hor} G.~Horel, \emph{Profinite completion of operads and the Grothendieck--Teichm\"uller group}, Adv.\ Math.\ \textbf{321} (2017), 326--390. Numbering of arXiv:1504.01605v2 (29 May 2015): Remark~4.20, Proposition~4.23, Corollary~4.24, Corollary~5.11, Definition~7.1, Theorem~7.2, Proposition~7.4, Lemma~7.5, Theorem~8.4.
+\bibitem{LS} P.~Lochak and L.~Schneps, \emph{Open problems in Grothendieck--Teichm\"uller theory}, in: Problems on Mapping Class Groups and Related Topics (B.~Farb, ed.), Proc.\ Sympos.\ Pure Math.\ \textbf{74}, Amer.\ Math.\ Soc., 2006, 165--186; the introduction (the definition of $\widehat{\mathrm{GT}}$) and \S1, Question~1.1. \url{https://webusers.imj-prg.fr/~leila.schneps/farb.pdf}.
+\bibitem{RZ} L.~Ribes and P.~Zalesskii, \emph{Profinite Groups}, 2nd ed., Ergeb.\ Math.\ Grenzgeb.\ (3) \textbf{40}, Springer, 2010; \S2.1, \S2.5, \S4.4.
+\bibitem{Se} J-P.~Serre, \emph{Cohomologie galoisienne}, Lecture Notes in Math.\ \textbf{5}, Springer. Numbering of the third edition: Chap.~I, \S2.6 (exercises 1 and 2) and \S3.3 (Proposition~14).
+\end{thebibliography}
+
+\end{document}

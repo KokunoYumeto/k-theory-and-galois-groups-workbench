@@ -1,0 +1,7 @@
+Example A, f=[x,y],   A_4 [rl]: |<x,y>| = 12, f = (12)(34), f^-1 y f = (132), |<x, f^-1 y f>| = 3, relation (I): True
+Example B, f=[x,y]^2, S_3 [rl]: |<x,y>| = 6, f = (132), f^-1 y f = (12), |<x, f^-1 y f>| = 2, relation (I): True
+Example C, f=[x,y]^2, A_5 [rl]: |<x,y>| = 60, f = (134), f^-1 y f = (135), |<x, f^-1 y f>| = 12, relation (I): True
+Example A, f=[x,y],   A_4 [lr]: |<x,y>| = 12, f = (12)(34), f^-1 y f = (132), |<x, f^-1 y f>| = 3, relation (I): True
+Example B, f=[x,y]^2, S_3 [lr]: |<x,y>| = 6, f = (123), f^-1 y f = (12), |<x, f^-1 y f>| = 2, relation (I): True
+Example C, f=[x,y]^2, A_5 [lr]: |<x,y>| = 60, f = (253), f^-1 y f = (243), |<x, f^-1 y f>| = 12, relation (I): True
+ALL AS CLAIMED
